@@ -6,280 +6,305 @@
     <title>LKSBoost - Boostez Vos Réseaux Sociaux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #FF6B00;
             --primary-dark: #E55E00;
+            --primary-light: #FFE8D9;
             --secondary: #28A745;
             --secondary-dark: #218838;
             --accent: #FFC107;
-            --dark: #212529;
-            --light: #F8F9FA;
-            --gray: #6C757D;
-            --transition: all 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --gradient-orange: linear-gradient(135deg, #FF6B00 0%, #FF8E53 100%);
-            --gradient-green: linear-gradient(135deg, #28A745 0%, #5CE27F 100%);
+            --dark: #111827;
+            --dark-light: #1F2937;
+            --light: #F9FAFB;
+            --gray: #6B7280;
+            --gray-light: #E5E7EB;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --gradient-primary: linear-gradient(135deg, #FF6B00 0%, #FF8E53 100%);
+            --gradient-dark: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+            --gradient-success: linear-gradient(135deg, #28A745 0%, #5CE27F 100%);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            background-color: var(--light);
         }
-        
-        /* Animation du logo en arrière-plan */
-        .logo-background {
+
+        /* Logo Animation Background */
+        .logo-bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            opacity: 0.05;
+            z-index: -2;
             pointer-events: none;
-            overflow: hidden;
+            opacity: 0.03;
         }
-        
-        .logo-background img {
+
+        .logo-bg-animation .logo-particle {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            opacity: 0.7;
-            animation: floatLogo 20s infinite linear;
+            width: 100px;
+            height: 100px;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF6B00"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>');
+            background-size: contain;
+            animation: floatParticle 25s infinite linear;
         }
-        
-        .logo-background img:nth-child(1) {
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-            animation-duration: 25s;
-        }
-        
-        .logo-background img:nth-child(2) {
-            top: 60%;
-            left: 80%;
-            animation-delay: 5s;
-            animation-duration: 30s;
-            animation-direction: reverse;
-        }
-        
-        .logo-background img:nth-child(3) {
-            top: 80%;
-            left: 15%;
-            animation-delay: 10s;
-            animation-duration: 35s;
-        }
-        
-        .logo-background img:nth-child(4) {
-            top: 20%;
-            left: 70%;
-            animation-delay: 15s;
-            animation-duration: 28s;
-            animation-direction: reverse;
-        }
-        
-        @keyframes floatLogo {
+
+        @keyframes floatParticle {
             0% {
                 transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.3;
             }
             25% {
-                transform: translate(100px, 50px) rotate(90deg) scale(1.1);
+                transform: translate(100px, 50px) rotate(90deg) scale(1.2);
+                opacity: 0.5;
             }
             50% {
-                transform: translate(50px, 100px) rotate(180deg) scale(0.9);
+                transform: translate(50px, 100px) rotate(180deg) scale(0.8);
+                opacity: 0.3;
             }
             75% {
-                transform: translate(-50px, 50px) rotate(270deg) scale(1.05);
+                transform: translate(-50px, 50px) rotate(270deg) scale(1.1);
+                opacity: 0.5;
             }
             100% {
                 transform: translate(0, 0) rotate(360deg) scale(1);
+                opacity: 0.3;
             }
         }
-        
+
         /* Navigation */
         .navbar {
-            background: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            padding: 15px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem 0;
             transition: var(--transition);
+            border-bottom: 1px solid rgba(255, 107, 0, 0.1);
         }
-        
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: var(--shadow);
+        }
+
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.75rem;
+            font-weight: 900;
+            font-size: 1.75rem;
+            color: var(--primary);
+            text-decoration: none;
         }
-        
+
         .navbar-brand img {
             height: 40px;
+            width: auto;
             transition: var(--transition);
         }
-        
+
         .navbar-brand:hover img {
-            transform: scale(1.1) rotate(10deg);
+            transform: rotate(15deg) scale(1.1);
         }
-        
-        .brand-text {
-            font-weight: 800;
-            font-size: 28px;
-            background: var(--gradient-orange);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
+
         .nav-link {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--dark) !important;
-            margin: 0 8px;
-            padding: 8px 16px !important;
-            border-radius: 50px;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.25rem;
+            border-radius: 0.5rem;
             transition: var(--transition);
             position: relative;
         }
-        
-        .nav-link:hover {
-            color: var(--primary) !important;
-            background: rgba(255, 107, 0, 0.1);
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
         }
-        
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
+        }
+
         .nav-link.active {
-            background: var(--gradient-orange);
-            color: white !important;
+            color: var(--primary) !important;
+            background: var(--primary-light);
         }
-        
+
         .btn-primary {
-            background: var(--gradient-orange);
+            background: var(--gradient-primary);
             border: none;
-            border-radius: 50px;
-            padding: 12px 30px;
+            border-radius: 0.75rem;
+            padding: 0.875rem 2rem;
             font-weight: 600;
+            font-size: 1rem;
             transition: var(--transition);
             box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
         }
-        
-        .btn-success {
-            background: var(--gradient-green);
-            border: none;
-            border-radius: 50px;
-            padding: 12px 30px;
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 0.75rem;
+            padding: 0.875rem 2rem;
             font-weight: 600;
             transition: var(--transition);
         }
-        
+
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
             padding: 180px 0 100px;
+            background: var(--gradient-dark);
+            color: white;
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: var(--gradient-orange);
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
         }
-        
-        .hero-logo {
-            position: absolute;
-            right: 10%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 400px;
-            height: 400px;
-            opacity: 0.1;
-            animation: pulseLogo 4s infinite ease-in-out;
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
-        
-        @keyframes pulseLogo {
-            0%, 100% {
-                transform: translateY(-50%) scale(1);
-                opacity: 0.1;
-            }
-            50% {
-                transform: translateY(-50%) scale(1.1);
-                opacity: 0.15;
-            }
-        }
-        
+
         .hero h1 {
             font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
+            font-weight: 900;
             line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff 0%, #FFC107 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-        
+
         .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
-        
+
         .hero-badges {
             display: flex;
-            gap: 15px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
-        
+
         .badge {
             background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
+
         .badge i {
             color: var(--accent);
-            margin-right: 5px;
+            font-size: 1.1rem;
         }
-        
-        /* Services Section */
-        .services-section {
-            padding: 100px 0;
-            background: var(--light);
+
+        .hero-illustration {
             position: relative;
+            height: 100%;
         }
-        
+
+        .hero-stats {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Common */
+        .section {
+            padding: 100px 0;
+        }
+
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 3rem;
         }
-        
+
         .section-title h2 {
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 15px;
+            color: var(--dark);
+            margin-bottom: 1rem;
             position: relative;
             display: inline-block;
         }
-        
+
         .section-title h2::after {
             content: '';
             position: absolute;
@@ -288,150 +313,214 @@
             transform: translateX(-50%);
             width: 60px;
             height: 4px;
-            background: var(--gradient-orange);
+            background: var(--gradient-primary);
             border-radius: 2px;
         }
-        
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services */
         .service-card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: var(--card-shadow);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
             transition: var(--transition);
             height: 100%;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-light);
             position: relative;
             overflow: hidden;
         }
-        
+
         .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
+            width: 100%;
             height: 5px;
-            background: var(--gradient-orange);
+            background: var(--gradient-primary);
         }
-        
+
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
         }
-        
+
         .service-icon {
             width: 70px;
             height: 70px;
-            background: var(--gradient-orange);
-            border-radius: 15px;
+            background: var(--gradient-primary);
+            border-radius: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
         }
-        
+
         .service-price {
             font-size: 2rem;
             font-weight: 800;
             color: var(--primary);
-            margin: 15px 0;
+            margin: 1rem 0;
         }
-        
+
         .service-features {
             list-style: none;
             padding: 0;
-            margin: 20px 0;
+            margin: 1.5rem 0;
         }
-        
+
         .service-features li {
-            padding: 5px 0;
+            padding: 0.5rem 0;
             color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
-        
+
         .service-features li i {
             color: var(--secondary);
-            margin-right: 10px;
+            font-size: 1rem;
         }
-        
+
         /* Categories */
-        .categories-section {
-            padding: 80px 0;
-            background: white;
-            position: relative;
+        .categories {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
-        
+
         .category-card {
-            background: var(--light);
-            border-radius: 15px;
-            padding: 30px;
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
             text-align: center;
             transition: var(--transition);
-            cursor: pointer;
+            box-shadow: var(--shadow);
+            height: 100%;
             border: 2px solid transparent;
         }
-        
+
         .category-card:hover {
             border-color: var(--primary);
             transform: translateY(-5px);
         }
-        
+
         .category-icon {
             width: 80px;
             height: 80px;
-            background: var(--gradient-orange);
+            background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 2rem;
-            margin: 0 auto 20px;
+            margin: 0 auto 1.5rem;
         }
-        
+
         /* Features */
-        .features-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            position: relative;
-        }
-        
         .feature-card {
             background: white;
-            border-radius: 15px;
-            padding: 40px 30px;
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
             text-align: center;
             transition: var(--transition);
-            box-shadow: var(--card-shadow);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
         .feature-number {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--gradient-orange);
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             line-height: 1;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
-        
-        /* Stats */
-        .stats-section {
-            padding: 80px 0;
-            background: var(--gradient-orange);
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--gradient-dark);
             color: white;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: 100%;
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 80px 0;
             position: relative;
             overflow: hidden;
         }
-        
-        .stats-section::before {
+
+        .cta-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -440,68 +529,49 @@
             bottom: 0;
             background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" fill-opacity="0.1"/></svg>');
         }
-        
-        .stat-item {
-            text-align: center;
+
+        .cta-content {
             position: relative;
             z-index: 1;
-        }
-        
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-        
-        /* Logo Showcase */
-        .logo-showcase {
-            padding: 80px 0;
-            background: white;
             text-align: center;
         }
-        
-        .logo-animated {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 40px;
-            animation: bounceLogo 3s infinite ease-in-out;
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
         }
-        
-        @keyframes bounceLogo {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            25% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-            50% {
-                transform: translateY(0) rotate(0deg);
-            }
-            75% {
-                transform: translateY(-10px) rotate(-5deg);
-            }
-        }
-        
+
         /* Footer */
         .footer {
             background: var(--dark);
             color: white;
             padding: 80px 0 0;
         }
-        
-        .footer-logo {
-            height: 50px;
-            margin-bottom: 20px;
+
+        .footer-brand {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
-        
+
+        .footer-brand img {
+            height: 40px;
+            width: auto;
+        }
+
         .footer h5 {
             color: white;
-            margin-bottom: 25px;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 0.75rem;
         }
-        
+
         .footer h5::after {
             content: '';
             position: absolute;
@@ -511,36 +581,44 @@
             height: 3px;
             background: var(--primary);
         }
-        
+
         .footer-links {
             list-style: none;
             padding: 0;
         }
-        
+
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 0.75rem;
         }
-        
+
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
+
         .footer-links a:hover {
             color: var(--primary);
             padding-left: 5px;
         }
-        
+
+        .footer-links a i {
+            width: 20px;
+            text-align: center;
+        }
+
         .social-icons {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
-        
+
         .social-icons a {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
@@ -550,91 +628,161 @@
             text-decoration: none;
             transition: var(--transition);
         }
-        
+
         .social-icons a:hover {
             background: var(--primary);
             transform: translateY(-3px);
         }
-        
+
         .copyright {
             background: rgba(0, 0, 0, 0.2);
-            padding: 25px 0;
-            margin-top: 60px;
+            padding: 2rem 0;
+            margin-top: 4rem;
             text-align: center;
             color: rgba(255, 255, 255, 0.7);
         }
-        
+
         .payment-methods {
             display: flex;
-            gap: 15px;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 20px;
+            margin-top: 1.5rem;
         }
-        
+
         .payment-methods img {
             height: 30px;
-            filter: grayscale(100%);
+            filter: grayscale(100%) brightness(200%);
             opacity: 0.7;
             transition: var(--transition);
         }
-        
+
         .payment-methods img:hover {
-            filter: grayscale(0%);
+            filter: grayscale(0%) brightness(100%);
             opacity: 1;
         }
-        
+
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
-            
+        }
+
+        @media (max-width: 992px) {
             .hero {
                 padding: 150px 0 80px;
             }
             
-            .hero-logo {
-                display: none;
+            .hero h1 {
+                font-size: 2.5rem;
             }
             
-            .logo-background img {
-                width: 150px;
-                height: 150px;
+            .hero p {
+                font-size: 1.125rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 130px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero-badges {
+                justify-content: center;
             }
             
             .section-title h2 {
                 font-size: 2rem;
             }
             
-            .stat-number {
-                font-size: 2.5rem;
+            .service-card,
+            .category-card,
+            .feature-card,
+            .testimonial-card {
+                padding: 2rem;
             }
             
-            .logo-animated {
-                width: 150px;
-                height: 150px;
+            .navbar-collapse {
+                background: white;
+                padding: 1rem;
+                border-radius: 1rem;
+                box-shadow: var(--shadow-lg);
+                margin-top: 1rem;
             }
         }
-        
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.75rem;
+            }
+            
+            .btn-primary,
+            .btn-outline-primary {
+                padding: 0.75rem 1.5rem;
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .footer {
+                padding: 60px 0 0;
+            }
+        }
+
+        /* Animations */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
             transition: var(--transition);
         }
-        
+
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
-    <!-- Logo animé en arrière-plan -->
-    <div class="logo-background">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Logo LKSBoost">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Logo LKSBoost">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Logo LKSBoost">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="Logo LKSBoost">
+    <!-- Logo Background Animation -->
+    <div class="logo-bg-animation">
+        <!-- Logo particles will be generated by JS -->
     </div>
 
     <!-- Navigation -->
@@ -642,13 +790,13 @@
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="LKSBoost Logo">
-                <span class="brand-text">LKSBoost</span>
+                <span>LKSBoost</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" href="#home">Accueil</a>
                     </li>
@@ -659,17 +807,17 @@
                         <a class="nav-link" href="#categories">Catégories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Fonctionnalités</a>
+                        <a class="nav-link" href="#features">Avantages</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#stats">Statistiques</a>
+                        <a class="nav-link" href="#testimonials">Avis</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <a href="catalog.php" class="btn btn-primary ms-3">
-                    <i class="fas fa-shopping-cart me-2"></i>Commander
+                <a href="catalog.php" class="btn btn-primary ms-lg-3 mt-3 mt-lg-0">
+                    <i class="fas fa-rocket me-2"></i>Commander
                 </a>
             </div>
         </div>
@@ -680,38 +828,103 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1>Boostez Votre Présence sur les Réseaux Sociaux</h1>
-                    <p>Augmentez vos followers, likes et vues sur TikTok, Instagram, YouTube et Facebook avec des services de haute qualité et une livraison rapide.</p>
-                    
-                    <div class="hero-badges">
-                        <span class="badge"><i class="fas fa-rocket"></i> Livraison Instantanée</span>
-                        <span class="badge"><i class="fas fa-shield-alt"></i> 100% Sécurisé</span>
-                        <span class="badge"><i class="fas fa-headset"></i> Support 24/7</span>
-                    </div>
-                    
-                    <div class="d-flex gap-3">
-                        <a href="catalog.php" class="btn btn-primary btn-lg">
-                            <i class="fas fa-play-circle me-2"></i>Commencer Maintenant
-                        </a>
-                        <a href="#services" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-info-circle me-2"></i>En Savoir Plus
-                        </a>
+                    <div class="hero-content">
+                        <h1 class="animate-on-scroll">Boostez Votre Visibilité sur les Réseaux Sociaux</h1>
+                        <p class="animate-on-scroll" style="animation-delay: 0.1s">Augmentez vos followers, likes et vues sur TikTok, Instagram, YouTube et Facebook avec des services de haute qualité et une livraison rapide.</p>
+                        
+                        <div class="hero-badges animate-on-scroll" style="animation-delay: 0.2s">
+                            <span class="badge"><i class="fas fa-bolt"></i>Livraison Rapide</span>
+                            <span class="badge"><i class="fas fa-shield-alt"></i>100% Sécurisé</span>
+                            <span class="badge"><i class="fas fa-headset"></i>Support 24/7</span>
+                        </div>
+                        
+                        <div class="d-flex flex-wrap gap-3 animate-on-scroll" style="animation-delay: 0.3s">
+                            <a href="catalog.php" class="btn btn-primary">
+                                <i class="fas fa-shopping-cart me-2"></i>Commander Maintenant
+                            </a>
+                            <a href="#services" class="btn btn-outline-primary">
+                                <i class="fas fa-play-circle me-2"></i>Voir les Services
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <!-- Logo animé dans le héros -->
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="LKSBoost Logo" class="hero-logo">
+                    <div class="hero-illustration text-center mt-5 mt-lg-0">
+                        <div class="position-relative">
+                            <div class="floating">
+                                <div class="d-flex justify-content-center">
+                                    <div class="bg-white rounded-4 p-4 shadow-lg" style="max-width: 400px; margin: 0 auto;">
+                                        <div class="row g-3">
+                                            <div class="col-6">
+                                                <div class="bg-primary-light rounded-3 p-3 text-center">
+                                                    <i class="fab fa-tiktok fa-2x text-primary"></i>
+                                                    <p class="mt-2 fw-bold">TikTok</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="bg-primary-light rounded-3 p-3 text-center">
+                                                    <i class="fab fa-instagram fa-2x text-primary"></i>
+                                                    <p class="mt-2 fw-bold">Instagram</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="bg-primary-light rounded-3 p-3 text-center">
+                                                    <i class="fab fa-youtube fa-2x text-primary"></i>
+                                                    <p class="mt-2 fw-bold">YouTube</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="bg-primary-light rounded-3 p-3 text-center">
+                                                    <i class="fab fa-facebook fa-2x text-primary"></i>
+                                                    <p class="mt-2 fw-bold">Facebook</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-stats animate-on-scroll" style="animation-delay: 0.4s">
+                            <div class="row text-center">
+                                <div class="col-6 col-md-3">
+                                    <div class="stat-item">
+                                        <div class="stat-number">15K+</div>
+                                        <div class="stat-label">Clients</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="stat-item">
+                                        <div class="stat-number">380K</div>
+                                        <div class="stat-label">Commandes</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="stat-item">
+                                        <div class="stat-number">99%</div>
+                                        <div class="stat-label">Satisfaction</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <div class="stat-item">
+                                        <div class="stat-number">24/7</div>
+                                        <div class="stat-label">Support</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services-section">
+    <section id="services" class="section">
         <div class="container">
             <div class="section-title animate-on-scroll">
-                <h2>Nos Services Populaires</h2>
-                <p class="text-muted">Découvrez nos services les plus demandés</p>
+                <h2>Services Populaires</h2>
+                <p>Découvrez nos services les plus demandés avec des prix compétitifs</p>
             </div>
             
             <div class="row g-4">
@@ -721,71 +934,69 @@
                             <i class="fab fa-tiktok"></i>
                         </div>
                         <h4>Followers TikTok</h4>
-                        <p class="text-muted">Augmentez vos followers TikTok rapidement et en toute sécurité</p>
+                        <p class="text-muted mb-3">Augmentez vos followers TikTok avec des comptes de qualité</p>
                         <div class="service-price">0.40 XOF / 1000</div>
                         <ul class="service-features">
                             <li><i class="fas fa-check"></i> Livraison en 2 heures</li>
-                            <li><i class="fas fa-check"></i> Followers de qualité</li>
+                            <li><i class="fas fa-check"></i> Followers actifs</li>
                             <li><i class="fas fa-check"></i> Garantie de rétention</li>
+                            <li><i class="fas fa-check"></i> Pas de mot de passe requis</li>
                         </ul>
-                        <a href="order.php?service=1" class="btn btn-primary w-100">Commander</a>
+                        <a href="order.php?service=1" class="btn btn-primary w-100">Commander Maintenant</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card animate-on-scroll" style="animation-delay: 0.1s">
+                        <div class="service-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <h4>Likes Instagram</h4>
+                        <p class="text-muted mb-3">Boostez votre engagement sur Instagram instantanément</p>
+                        <div class="service-price">0.35 XOF / 1000</div>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Livraison instantanée</li>
+                            <li><i class="fas fa-check"></i> Likes réels</li>
+                            <li><i class="fas fa-check"></i> Mélange démographique</li>
+                            <li><i class="fas fa-check"></i> Sécurisé</li>
+                        </ul>
+                        <a href="order.php?service=2" class="btn btn-primary w-100">Commander Maintenant</a>
                     </div>
                 </div>
                 
                 <div class="col-lg-4 col-md-6">
                     <div class="service-card animate-on-scroll" style="animation-delay: 0.2s">
                         <div class="service-icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <h4>Likes Instagram</h4>
-                        <p class="text-muted">Boostez votre engagement sur Instagram</p>
-                        <div class="service-price">0.35 XOF / 1000</div>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Livraison instantanée</li>
-                            <li><i class="fas fa-check"></i> Likes réels</li>
-                            <li><i class="fas fa-check"></i> Pas de mot de passe requis</li>
-                        </ul>
-                        <a href="order.php?service=2" class="btn btn-primary w-100">Commander</a>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="service-card animate-on-scroll" style="animation-delay: 0.4s">
-                        <div class="service-icon">
                             <i class="fab fa-youtube"></i>
                         </div>
                         <h4>Vues YouTube</h4>
-                        <p class="text-muted">Augmentez la visibilité de vos vidéos</p>
+                        <p class="text-muted mb-3">Augmentez la visibilité de vos vidéos YouTube</p>
                         <div class="service-price">0.50 XOF / 1000</div>
                         <ul class="service-features">
                             <li><i class="fas fa-check"></i> Vues du monde entier</li>
-                            <li><i class="fas fa-check"></i> Démarrage rapide</li>
-                            <li><i class="fas fa-check"></i> Compatible avec tous les types de vidéos</li>
+                            <li><i class="fas fa-check"></i> Démarrage en 24h</li>
+                            <li><i class="fas fa-check"></i> Compatible toutes vidéos</li>
+                            <li><i class="fas fa-check"></i> Rétention élevée</li>
                         </ul>
-                        <a href="order.php?service=3" class="btn btn-primary w-100">Commander</a>
+                        <a href="order.php?service=3" class="btn btn-primary w-100">Commander Maintenant</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Logo Showcase -->
-    <section class="logo-showcase">
-        <div class="container">
-            <div class="animate-on-scroll">
-                <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="LKSBoost Logo" class="logo-animated">
-                <h2>LKSBoost - Votre Partenaire Réseaux Sociaux</h2>
-                <p class="lead text-muted">Rejoignez des milliers de clients satisfaits qui ont boosté leur présence en ligne</p>
+            
+            <div class="text-center mt-5">
+                <a href="catalog.php" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-list me-2"></i>Voir Tous les Services
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Categories Section -->
-    <section id="categories" class="categories-section">
+    <section id="categories" class="section categories">
         <div class="container">
             <div class="section-title animate-on-scroll">
                 <h2>Catégories de Services</h2>
-                <p class="text-muted">Choisissez votre réseau social préféré</p>
+                <p>Choisissez votre réseau social préféré</p>
             </div>
             
             <div class="row g-4">
@@ -794,8 +1005,11 @@
                         <div class="category-icon">
                             <i class="fab fa-tiktok"></i>
                         </div>
-                        <h5>TikTok</h5>
-                        <p class="text-muted">Followers, Likes, Vues, Commentaires</p>
+                        <h4>TikTok</h4>
+                        <p class="text-muted">Followers, Likes, Vues, Commentaires, Partages</p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">Populaire</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -804,8 +1018,8 @@
                         <div class="category-icon">
                             <i class="fab fa-instagram"></i>
                         </div>
-                        <h5>Instagram</h5>
-                        <p class="text-muted">Followers, Likes, Commentaires, Vues Stories</p>
+                        <h4>Instagram</h4>
+                        <p class="text-muted">Followers, Likes, Commentaires, Vues Stories, Abonnés</p>
                     </div>
                 </div>
                 
@@ -814,8 +1028,8 @@
                         <div class="category-icon">
                             <i class="fab fa-youtube"></i>
                         </div>
-                        <h5>YouTube</h5>
-                        <p class="text-muted">Vues, Likes, Abonnés, Commentaires</p>
+                        <h4>YouTube</h4>
+                        <p class="text-muted">Vues, Likes, Abonnés, Commentaires, Heures de visionnage</p>
                     </div>
                 </div>
                 
@@ -824,8 +1038,8 @@
                         <div class="category-icon">
                             <i class="fab fa-facebook"></i>
                         </div>
-                        <h5>Facebook</h5>
-                        <p class="text-muted">Likes, Followers, Partages, Réactions</p>
+                        <h4>Facebook</h4>
+                        <p class="text-muted">Likes, Followers, Partages, Réactions, Commentaires</p>
                     </div>
                 </div>
             </div>
@@ -833,11 +1047,11 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features-section">
+    <section id="features" class="section">
         <div class="container">
             <div class="section-title animate-on-scroll">
                 <h2>Pourquoi Choisir LKSBoost ?</h2>
-                <p class="text-muted">Découvrez nos avantages exclusifs</p>
+                <p>Découvrez nos avantages exclusifs</p>
             </div>
             
             <div class="row g-4">
@@ -876,33 +1090,76 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section id="stats" class="stats-section">
+    <!-- Testimonials -->
+    <section id="testimonials" class="section testimonials">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item animate-on-scroll">
-                        <div class="stat-number">15K+</div>
-                        <p>Clients Satisfaits</p>
+            <div class="section-title animate-on-scroll">
+                <h2 style="color: white;">Ce Que Disent Nos Clients</h2>
+                <p style="color: rgba(255, 255, 255, 0.8)">Découvrez les expériences de nos clients satisfaits</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-text">
+                            "Service exceptionnel ! J'ai commandé des followers TikTok et ils ont été livrés en moins de 2 heures. Qualité impeccable !"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SA</div>
+                            <div>
+                                <h6 style="color: white;">Sarah A.</h6>
+                                <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">Influenceuse TikTok</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item animate-on-scroll" style="animation-delay: 0.1s">
-                        <div class="stat-number">380K</div>
-                        <p>Commandes Traitées</p>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card animate-on-scroll" style="animation-delay: 0.1s">
+                        <div class="testimonial-text">
+                            "Je recommande LKSBoost à tous les créateurs de contenu. Le support est réactif et les résultats sont au rendez-vous."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MK</div>
+                            <div>
+                                <h6 style="color: white;">Mohamed K.</h6>
+                                <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">YouTubeur</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item animate-on-scroll" style="animation-delay: 0.2s">
-                        <div class="stat-number">99%</div>
-                        <p>Taux de Satisfaction</p>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card animate-on-scroll" style="animation-delay: 0.2s">
+                        <div class="testimonial-text">
+                            "Service rapide et fiable. J'ai augmenté ma visibilité sur Instagram grâce à leurs services de likes et commentaires."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">LF</div>
+                            <div>
+                                <h6 style="color: white;">Laura F.</h6>
+                                <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">Entrepreneure</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item animate-on-scroll" style="animation-delay: 0.3s">
-                        <div class="stat-number">24/7</div>
-                        <p>Support Actif</p>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title animate-on-scroll">Prêt à Booster Votre Présence ?</h2>
+                <p class="mb-4 animate-on-scroll" style="animation-delay: 0.1s">Rejoignez des milliers de clients satisfaits et augmentez votre visibilité dès aujourd'hui</p>
+                <div class="d-flex flex-wrap justify-content-center gap-3 animate-on-scroll" style="animation-delay: 0.2s">
+                    <a href="catalog.php" class="btn btn-light btn-lg">
+                        <i class="fas fa-shopping-cart me-2"></i>Commander Maintenant
+                    </a>
+                    <a href="#contact" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-question-circle me-2"></i>Nous Contacter
+                    </a>
                 </div>
             </div>
         </div>
@@ -913,49 +1170,59 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="LKSBoost Logo" class="footer-logo">
-                    <p class="mb-4" style="color: rgba(255,255,255,0.7);">Boostez votre présence sur les réseaux sociaux avec nos services de qualité professionnelle.</p>
+                    <div class="footer-brand">
+                        <img src="https://cdn-icons-png.flaticon.com/512/732/732221.png" alt="LKSBoost Logo">
+                        <span>LKSBoost</span>
+                    </div>
+                    <p class="mb-4">Boostez votre présence sur les réseaux sociaux avec nos services de qualité professionnelle. Livraison rapide, support 24/7 et satisfaction garantie.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div class="col-lg-2 col-md-6 mb-5 mb-md-0">
-                    <h5>Liens Rapides</h5>
+                    <h5>Navigation</h5>
                     <ul class="footer-links">
-                        <li><a href="index.php">Accueil</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#features">Fonctionnalités</a></li>
-                        <li><a href="#stats">Statistiques</a></li>
-                        <li><a href="catalog.php">Catalogue</a></li>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+                        <li><a href="#categories"><i class="fas fa-chevron-right"></i> Catégories</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Avantages</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Avis</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
                     <h5>Services</h5>
                     <ul class="footer-links">
-                        <li><a href="#">Followers TikTok</a></li>
-                        <li><a href="#">Likes Instagram</a></li>
-                        <li><a href="#">Vues YouTube</a></li>
-                        <li><a href="#">Followers Facebook</a></li>
-                        <li><a href="catalog.php">Voir tous les services</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Followers TikTok</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Likes Instagram</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Vues YouTube</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Followers Facebook</a></li>
+                        <li><a href="catalog.php"><i class="fas fa-chevron-right"></i> Tous les services</a></li>
                     </ul>
                 </div>
                 
                 <div class="col-lg-3 col-md-6">
                     <h5>Contact</h5>
                     <ul class="footer-links">
-                        <li style="color: rgba(255,255,255,0.7); margin-bottom: 15px;">
-                            <i class="fas fa-envelope me-2"></i> contact@lksboost.com
+                        <li>
+                            <a href="mailto:contact@lksboost.com">
+                                <i class="fas fa-envelope"></i> contact@lksboost.com
+                            </a>
                         </li>
-                        <li style="color: rgba(255,255,255,0.7); margin-bottom: 15px;">
-                            <i class="fas fa-clock me-2"></i> Support 24h/24 et 7j/7
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-clock"></i> Support 24h/24 et 7j/7
+                            </a>
                         </li>
-                        <li style="color: rgba(255,255,255,0.7);">
-                            <i class="fas fa-lock me-2"></i> Paiements sécurisés
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-lock"></i> Paiements sécurisés
+                            </a>
                         </li>
                     </ul>
                     
@@ -971,7 +1238,12 @@
             
             <div class="copyright">
                 <div class="container">
-                    <p>&copy; <?php echo date('Y'); ?> LKSBoost. Tous droits réservés. | <a href="#" style="color: rgba(255,255,255,0.7);">Conditions d'utilisation</a> | <a href="#" style="color: rgba(255,255,255,0.7);">Politique de confidentialité</a></p>
+                    <p class="mb-2">&copy; 2024 LKSBoost. Tous droits réservés.</p>
+                    <p class="mb-0">
+                        <a href="#" style="color: rgba(255,255,255,0.7);">Conditions d'utilisation</a> | 
+                        <a href="#" style="color: rgba(255,255,255,0.7);">Politique de confidentialité</a> | 
+                        <a href="#" style="color: rgba(255,255,255,0.7);">Politique de remboursement</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -979,8 +1251,34 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Animation au défilement
+        // Logo background particles
         document.addEventListener('DOMContentLoaded', function() {
+            const logoBg = document.querySelector('.logo-bg-animation');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'logo-particle';
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Random size
+                const size = 40 + Math.random() * 60;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random animation
+                const duration = 20 + Math.random() * 20;
+                const delay = Math.random() * 20;
+                particle.style.animationDuration = duration + 's';
+                particle.style.animationDelay = delay + 's';
+                
+                logoBg.appendChild(particle);
+            }
+            
+            // Scroll animations
             const animateElements = document.querySelectorAll('.animate-on-scroll');
             
             const observer = new IntersectionObserver((entries) => {
@@ -998,11 +1296,20 @@
                 observer.observe(element);
             });
             
-            // Navigation active
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
             
             window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                // Active nav link
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
@@ -1020,10 +1327,35 @@
                 });
             });
             
-            // Animation des logos en arrière-plan
-            const logos = document.querySelectorAll('.logo-background img');
-            logos.forEach((logo, index) => {
-                logo.style.animationDelay = `${index * 5}s`;
+            // Mobile menu close on click
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 992) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+                });
+            });
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
     </script>
