@@ -1,174 +1,183 @@
 <?php
-require_once 'includes/header.php';
+// payment.php
+session_start();
+require_once 'includes/config.php';
+require_once 'includes/functions.php';
 
-$order_id = isset($_GET['order']) ? intval($_GET['order']) : 0;
-$order = getOrderById($order_id);
+// Récupérer la commande
+$order_number = $_GET['order'] ?? '';
+$order = getOrderByNumber($order_number);
 
-if (!$order) {
+if (!$order || $order['status'] !== 'pending') {
     header('Location: catalog.php');
-    exit;
+    exit();
 }
 
-// Traitement du paiement
-if ($_POST && isset($_POST['process_payment'])) {
-    $payment_method = $_POST['payment_method'];
-    
-    // Traiter le paiement selon la méthode choisie
-    if (processPayment($order_id, $payment_method, $order['price'])) {
-        // Si paiement réussi, envoyer la commande à Exobooster
-        $exobooster_response = sendOrderToExobooster($order);
-        
-        if ($exobooster_response && isset($exobooster_response['order'])) {
-            // Mettre à jour la commande avec l'ID Exobooster
-            updateOrderWithExoboosterId($order_id, $exobooster_response['order']);
-            
-            // Rediriger vers la page de confirmation
-            header('Location: status.php?order=' . $order['order_number']);
-            exit;
-        } else {
-            $error = "Erreur lors de l'envoi de la commande à Exobooster";
-        }
-    } else {
-        $error = "Erreur lors du traitement du paiement";
-    }
-}
+// Générer un token CSRF
+$csrf_token = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $csrf_token;
 ?>
-
-<div class="container">
-    <h1>Paiement</h1>
-    
-    <?php if (isset($error)): ?>
-        <div class="alert alert-danger">
-            <?= htmlspecialchars($error) ?>
-        </div>
-    <?php endif; ?>
-    
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Récapitulatif de commande</h3>
-                </div>
-                <div class="card-body">
-                    <p><strong>Service:</strong> <?= htmlspecialchars($order['service_name']) ?></p>
-                    <p><strong>Lien:</strong> <?= htmlspecialchars($order['link']) ?></p>
-                    <p><strong>Quantité:</strong> <?= $order['quantity'] ?></p>
-                    <p><strong>Prix total:</strong> <?= CURRENCY . $order['price'] ?></p>
-                </div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - <?php echo SITE_NAME; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        .payment-method {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
         
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Méthode de paiement</h3>
+        .payment-method:hover,
+        .payment-method.active {
+            border-color: #8A2BE2;
+            background-color: rgba(138, 43, 226, 0.05);
+        }
+        
+        .StripeElement {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="text-center mb-5">Paiement Sécurisé</h1>
+                
+                <!-- Résumé de commande -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5>Commande #<?php echo $order['order_number']; ?></h5>
+                        <p><strong>Service:</strong> <?php echo $order['service_name']; ?></p>
+                        <p><strong>Montant:</strong> <?php echo $order['currency'] . number_format($order['price'], 4); ?></p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form method="POST" id="payment-form">
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" 
-                                       id="stripe" value="stripe" checked>
-                                <label class="form-check-label" for="stripe">
-                                    <i class="fab fa-cc-stripe"></i> Carte Bancaire (Stripe)
-                                </label>
-                            </div>
-                            
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" 
-                                       id="paypal" value="paypal">
-                                <label class="form-check-label" for="paypal">
-                                    <i class="fab fa-paypal"></i> PayPal
-                                </label>
-                            </div>
-                            
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" 
-                                       id="mobile_money" value="mobile_money">
-                                <label class="form-check-label" for="mobile_money">
-                                    <i class="fas fa-mobile-alt"></i> Mobile Money
-                                </label>
-                            </div>
-                        </div>
+                
+                <!-- Méthodes de paiement -->
+                <form id="payment-form" action="process_payment.php" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                    <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                    
+                    <!-- Choix de la méthode -->
+                    <div class="mb-4">
+                        <h5>Choisissez votre moyen de paiement:</h5>
                         
-                        <!-- Section Stripe (affichée par défaut) -->
-                        <div id="stripe-section" class="payment-section">
-                            <div class="mb-3">
-                                <label for="card-element" class="form-label">
-                                    Informations de la carte
-                                </label>
-                                <div id="card-element" class="form-control">
-                                    <!-- Stripe Elements s'affichera ici -->
+                        <div class="payment-method active" onclick="selectPaymentMethod('stripe')">
+                            <input type="radio" name="payment_method" value="stripe" checked hidden>
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fab fa-cc-stripe fa-2x text-primary"></i>
                                 </div>
-                                <div id="card-errors" role="alert" class="text-danger mt-2"></div>
+                                <div>
+                                    <h6 class="mb-1">Carte Bancaire (Stripe)</h6>
+                                    <p class="mb-0 text-muted">Visa, Mastercard, American Express</p>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Section PayPal (cachée par défaut) -->
-                        <div id="paypal-section" class="payment-section" style="display: none;">
-                            <p>Vous serez redirigé vers PayPal pour compléter votre paiement.</p>
-                        </div>
-                        
-                        <!-- Section Mobile Money (cachée par défaut) -->
-                        <div id="mobile_money-section" class="payment-section" style="display: none;">
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Numéro de téléphone</label>
-                                <input type="tel" class="form-control" id="phone" name="phone">
-                            </div>
-                            <div class="mb-3">
-                                <label for="operator" class="form-label">Opérateur</label>
-                                <select class="form-control" id="operator" name="operator">
-                                    <option value="orange">Orange Money</option>
-                                    <option value="mtn">MTN Mobile Money</option>
-                                    <option value="moov">Moov Money</option>
-                                </select>
+                        <div class="payment-method" onclick="selectPaymentMethod('paypal')">
+                            <input type="radio" name="payment_method" value="paypal" hidden>
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="fab fa-paypal fa-2x" style="color: #003087;"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">PayPal</h6>
+                                    <p class="mb-0 text-muted">Payer avec votre compte PayPal</p>
+                                </div>
                             </div>
                         </div>
-                        
-                        <button type="submit" name="process_payment" class="btn btn-success btn-lg w-100">
-                            Payer <?= CURRENCY . $order['price'] ?>
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                    
+                    <!-- Formulaire Stripe -->
+                    <div id="stripe-form" class="payment-form">
+                        <div class="mb-3">
+                            <label>Informations de carte</label>
+                            <div id="card-element" class="form-control"></div>
+                            <div id="card-errors" class="text-danger mt-2"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bouton de paiement -->
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <i class="fas fa-lock me-2"></i>
+                        Payer <?php echo $order['currency'] . number_format($order['price'], 4); ?>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-// Gestion de l'affichage des sections de paiement
-const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
-paymentMethods.forEach(method => {
-    method.addEventListener('change', function() {
-        // Cacher toutes les sections
-        document.querySelectorAll('.payment-section').forEach(section => {
-            section.style.display = 'none';
+    <script>
+        // Configuration Stripe
+        const stripe = Stripe('<?php echo STRIPE_PUBLIC_KEY; ?>');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+        
+        // Gestion des erreurs
+        cardElement.addEventListener('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            displayError.textContent = event.error ? event.error.message : '';
         });
         
-        // Afficher la section correspondante
-        const sectionId = this.value + '-section';
-        document.getElementById(sectionId).style.display = 'block';
-    });
-});
-
-// Configuration Stripe
-const stripe = Stripe('<?= STRIPE_PUBLIC_KEY ?>');
-const elements = stripe.elements();
-const cardElement = elements.create('card');
-cardElement.mount('#card-element');
-
-// Gestion des erreurs de carte
-cardElement.addEventListener('change', function(event) {
-    const displayError = document.getElementById('card-errors');
-    if (event.error) {
-        displayError.textContent = event.error.message;
-    } else {
-        displayError.textContent = '';
-    }
-});
-</script>
-
-<?php
-require_once 'includes/footer.php';
-?>
+        // Sélection de la méthode de paiement
+        function selectPaymentMethod(method) {
+            // Mettre à jour le radio button
+            document.querySelector(`input[name="payment_method"][value="${method}"]`).checked = true;
+            
+            // Mettre à jour l'apparence
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Soumission du formulaire
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+            
+            if (paymentMethod === 'stripe') {
+                // Traitement Stripe
+                const {paymentMethod, error} = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardElement,
+                });
+                
+                if (error) {
+                    document.getElementById('card-errors').textContent = error.message;
+                    return;
+                }
+                
+                // Ajouter le paymentMethod.id au formulaire
+                const paymentMethodId = document.createElement('input');
+                paymentMethodId.type = 'hidden';
+                paymentMethodId.name = 'stripe_payment_method_id';
+                paymentMethodId.value = paymentMethod.id;
+                form.appendChild(paymentMethodId);
+                
+                // Soumettre le formulaire
+                form.submit();
+            } else {
+                // Pour PayPal, redirection via le backend
+                form.submit();
+            }
+        });
+    </script>
+</body>
+</html>
