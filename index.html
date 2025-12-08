@@ -108,27 +108,29 @@
             gap: 0.75rem;
             font-weight: 900;
             font-size: 1.75rem;
-            color: var(--primary);
+            color: white;
             text-decoration: none;
-        }
-        .boss {
-            color: white ;
-            font-weight: 900;
         }
 
         .navbar-brand img {
             height: 40px;
             width: auto;
             transition: var(--transition);
+            filter: drop-shadow(0 0 5px rgba(255, 107, 0, 0.3));
         }
 
         .navbar-brand:hover img {
             transform: rotate(15deg) scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.5));
+        }
+
+        .navbar-brand:hover {
+            color: var(--primary);
         }
 
         .nav-link {
             font-weight: 600;
-            color: var(--dark) !important;
+            color: white !important;
             padding: 0.5rem 1rem !important;
             margin: 0 0.25rem;
             border-radius: 0.5rem;
@@ -155,7 +157,7 @@
 
         .nav-link.active {
             color: var(--primary) !important;
-            background: var(--primary-light);
+            background: rgba(255, 107, 0, 0.1);
         }
 
         .btn-primary {
@@ -546,6 +548,211 @@
             margin-bottom: 1rem;
         }
 
+        /* Modal Styles */
+        .order-modal .modal-content {
+            border-radius: 1.5rem;
+            border: none;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .order-modal .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 1.5rem 1.5rem 0 0;
+            padding: 1.5rem 2rem;
+            border-bottom: none;
+        }
+
+        .order-modal .modal-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .order-modal .btn-close {
+            filter: brightness(0) invert(1);
+            opacity: 0.8;
+        }
+
+        .order-modal .modal-body {
+            padding: 2rem;
+        }
+
+        /* Platform Selection */
+        .platform-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .platform-option {
+            border: 2px solid var(--gray-light);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .platform-option:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .platform-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .platform-option i {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .platform-option.tiktok i { color: #000000; }
+        .platform-option.instagram i { color: #E4405F; }
+        .platform-option.youtube i { color: #FF0000; }
+        .platform-option.facebook i { color: #1877F2; }
+        .platform-option.twitter i { color: #1DA1F2; }
+        .platform-option.telegram i { color: #26A5E4; }
+        .platform-option.whatsapp i { color: #25D366; }
+
+        /* Service Selection */
+        .service-selector {
+            margin-bottom: 2rem;
+        }
+
+        .service-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .service-option:hover {
+            border-color: var(--primary-light);
+        }
+
+        .service-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .service-name {
+            font-weight: 500;
+        }
+
+        .service-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Quantity Controls */
+        .quantity-selector {
+            background: var(--light);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quantity-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .quantity-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        #quantityInput {
+            flex: 1;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: none;
+            background: transparent;
+        }
+
+        /* Link Input */
+        .link-input {
+            margin-bottom: 2rem;
+        }
+
+        .link-input label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .link-input input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .link-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+        }
+
+        /* Price Summary */
+        .price-summary {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #FFF5EB 100%);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .price-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            padding-top: 0.75rem;
+            border-top: 2px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--gray-light);
+            padding: 1.5rem 2rem;
+        }
+
         /* Footer */
         .footer {
             background: var(--dark);
@@ -719,11 +926,19 @@
             }
             
             .navbar-collapse {
-                background: white;
+                background: black;
                 padding: 1rem;
                 border-radius: 1rem;
                 box-shadow: var(--shadow-lg);
                 margin-top: 1rem;
+            }
+            
+            .platform-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .order-modal .modal-body {
+                padding: 1.5rem;
             }
         }
 
@@ -753,6 +968,16 @@
             
             .footer {
                 padding: 60px 0 0;
+            }
+            
+            .platform-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-option {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
             }
         }
 
@@ -794,7 +1019,7 @@
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="logo.jpeg" alt="LKSBoost Logo">
-                <span class="boss">LKSBoost</span>
+                <span>LKSBoost</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -820,9 +1045,9 @@
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
-                <a href="catalog.php" class="btn btn-primary ms-lg-3 mt-3 mt-lg-0">
+                <button class="btn btn-primary ms-lg-3 mt-3 mt-lg-0" onclick="openOrderModal()">
                     <i class="fas fa-rocket me-2"></i>Commander
-                </a>
+                </button>
             </div>
         </div>
     </nav>
@@ -843,9 +1068,9 @@
                         </div>
                         
                         <div class="d-flex flex-wrap gap-3 animate-on-scroll" style="animation-delay: 0.3s">
-                            <a href="catalog.php" class="btn btn-primary">
+                            <button class="btn btn-primary" onclick="openOrderModal()">
                                 <i class="fas fa-shopping-cart me-2"></i>Commander Maintenant
-                            </a>
+                            </button>
                             <a href="#services" class="btn btn-outline-primary">
                                 <i class="fas fa-play-circle me-2"></i>Voir les Services
                             </a>
@@ -946,7 +1171,7 @@
                             <li><i class="fas fa-check"></i> Garantie de rétention</li>
                             <li><i class="fas fa-check"></i> Pas de mot de passe requis</li>
                         </ul>
-                        <a href="order.php?service=1" class="btn btn-primary w-100">Commander Maintenant</a>
+                        <button class="btn btn-primary w-100" onclick="openOrderModal('tiktok')">Commander Maintenant</button>
                     </div>
                 </div>
                 
@@ -964,7 +1189,7 @@
                             <li><i class="fas fa-check"></i> Mélange démographique</li>
                             <li><i class="fas fa-check"></i> Sécurisé</li>
                         </ul>
-                        <a href="order.php?service=2" class="btn btn-primary w-100">Commander Maintenant</a>
+                        <button class="btn btn-primary w-100" onclick="openOrderModal('instagram')">Commander Maintenant</button>
                     </div>
                 </div>
                 
@@ -982,15 +1207,15 @@
                             <li><i class="fas fa-check"></i> Compatible toutes vidéos</li>
                             <li><i class="fas fa-check"></i> Rétention élevée</li>
                         </ul>
-                        <a href="order.php?service=3" class="btn btn-primary w-100">Commander Maintenant</a>
+                        <button class="btn btn-primary w-100" onclick="openOrderModal('youtube')">Commander Maintenant</button>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-5">
-                <a href="catalog.php" class="btn btn-outline-primary btn-lg">
+                <button class="btn btn-outline-primary btn-lg" onclick="openOrderModal()">
                     <i class="fas fa-list me-2"></i>Voir Tous les Services
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -1010,9 +1235,9 @@
                             <i class="fab fa-tiktok"></i>
                         </div>
                         <h4>TikTok</h4>
-                        <p class="text-muted">Followers, Likes, Vues, Commentaires, Partages</p>
+                        <p class="text-muted">Followers, J'aime, Vues, Sauvegardes, Partages, Commentaires, Personnalisés, J'aime Live</p>
                         <div class="mt-3">
-                            <span class="badge bg-primary bg-opacity-10 text-primary">Populaire</span>
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('tiktok')">Commander</button>
                         </div>
                     </div>
                 </div>
@@ -1023,7 +1248,10 @@
                             <i class="fab fa-instagram"></i>
                         </div>
                         <h4>Instagram</h4>
-                        <p class="text-muted">Followers, Likes, Commentaires, Vues Stories, Abonnés</p>
+                        <p class="text-muted">Followers, J'aime, Vues, Commentaires, Vues Story, Abonnés</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('instagram')">Commander</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -1033,7 +1261,10 @@
                             <i class="fab fa-youtube"></i>
                         </div>
                         <h4>YouTube</h4>
-                        <p class="text-muted">Vues, Likes, Abonnés, Commentaires, Heures de visionnage</p>
+                        <p class="text-muted">Abonnés, Vues, Commentaires, J'aime (Likes)</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('youtube')">Commander</button>
+                        </div>
                     </div>
                 </div>
                 
@@ -1043,7 +1274,62 @@
                             <i class="fab fa-facebook"></i>
                         </div>
                         <h4>Facebook</h4>
-                        <p class="text-muted">Likes, Followers, Partages, Réactions, Commentaires</p>
+                        <p class="text-muted">Abonnés Page/Profil, J'aime, Réactions, Partages, Membres Groupe, Vues Vidéo/Reel, Commentaires, Avis</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('facebook')">Commander</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card animate-on-scroll">
+                        <div class="category-icon">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <h4>Twitter</h4>
+                        <p class="text-muted">Followers, Likes, Retweets, Republication, Commentaires</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('twitter')">Commander</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card animate-on-scroll" style="animation-delay: 0.1s">
+                        <div class="category-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <h4>Telegram</h4>
+                        <p class="text-muted">Membres Groupe, Vues Publication, Vues Future, Réactions Publication</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('telegram')">Commander</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card animate-on-scroll" style="animation-delay: 0.2s">
+                        <div class="category-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h4>WhatsApp</h4>
+                        <p class="text-muted">Abonnés Chaîne, Réactions Chaîne</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal('whatsapp')">Commander</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card animate-on-scroll" style="animation-delay: 0.3s">
+                        <div class="category-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Toutes Plateformes</h4>
+                        <p class="text-muted">Découvrez tous nos services disponibles</p>
+                        <div class="mt-3">
+                            <button class="btn btn-sm btn-primary" onclick="openOrderModal()">Voir Services</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1158,9 +1444,9 @@
                 <h2 class="cta-title animate-on-scroll">Prêt à Booster Votre Présence ?</h2>
                 <p class="mb-4 animate-on-scroll" style="animation-delay: 0.1s">Rejoignez des milliers de clients satisfaits et augmentez votre visibilité dès aujourd'hui</p>
                 <div class="d-flex flex-wrap justify-content-center gap-3 animate-on-scroll" style="animation-delay: 0.2s">
-                    <a href="catalog.php" class="btn btn-light btn-lg">
+                    <button class="btn btn-light btn-lg" onclick="openOrderModal()">
                         <i class="fas fa-shopping-cart me-2"></i>Commander Maintenant
-                    </a>
+                    </button>
                     <a href="#contact" class="btn btn-outline-light btn-lg">
                         <i class="fas fa-question-circle me-2"></i>Nous Contacter
                     </a>
@@ -1202,11 +1488,11 @@
                 <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
                     <h5>Services</h5>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Followers TikTok</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Likes Instagram</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Vues YouTube</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Followers Facebook</a></li>
-                        <li><a href="catalog.php"><i class="fas fa-chevron-right"></i> Tous les services</a></li>
+                        <li><a href="#" onclick="openOrderModal('tiktok')"><i class="fas fa-chevron-right"></i> Followers TikTok</a></li>
+                        <li><a href="#" onclick="openOrderModal('instagram')"><i class="fas fa-chevron-right"></i> Likes Instagram</a></li>
+                        <li><a href="#" onclick="openOrderModal('youtube')"><i class="fas fa-chevron-right"></i> Vues YouTube</a></li>
+                        <li><a href="#" onclick="openOrderModal('facebook')"><i class="fas fa-chevron-right"></i> Followers Facebook</a></li>
+                        <li><a href="#" onclick="openOrderModal()"><i class="fas fa-chevron-right"></i> Tous les services</a></li>
                     </ul>
                 </div>
                 
@@ -1253,10 +1539,200 @@
         </div>
     </footer>
 
+    <!-- Order Modal -->
+    <div class="modal fade order-modal" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Commander un Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Étape 1: Choix de la plateforme -->
+                    <div class="mb-4" id="platformStep">
+                        <h6 class="mb-3">1. Choisissez votre réseau social</h6>
+                        <div class="platform-selector">
+                            <div class="platform-option tiktok" data-platform="tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <div>TikTok</div>
+                            </div>
+                            <div class="platform-option instagram" data-platform="instagram">
+                                <i class="fab fa-instagram"></i>
+                                <div>Instagram</div>
+                            </div>
+                            <div class="platform-option youtube" data-platform="youtube">
+                                <i class="fab fa-youtube"></i>
+                                <div>YouTube</div>
+                            </div>
+                            <div class="platform-option facebook" data-platform="facebook">
+                                <i class="fab fa-facebook"></i>
+                                <div>Facebook</div>
+                            </div>
+                            <div class="platform-option twitter" data-platform="twitter">
+                                <i class="fab fa-twitter"></i>
+                                <div>Twitter</div>
+                            </div>
+                            <div class="platform-option telegram" data-platform="telegram">
+                                <i class="fab fa-telegram"></i>
+                                <div>Telegram</div>
+                            </div>
+                            <div class="platform-option whatsapp" data-platform="whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>WhatsApp</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 2: Choix du service (visible après choix plateforme) -->
+                    <div class="service-selector mb-4" id="serviceStep" style="display: none;">
+                        <h6 class="mb-3">2. Choisissez le service</h6>
+                        <div id="serviceOptions">
+                            <!-- Les services seront injectés dynamiquement -->
+                        </div>
+                    </div>
+
+                    <!-- Étape 3: Lien (visible après choix service) -->
+                    <div class="link-input mb-4" id="linkStep" style="display: none;">
+                        <h6 class="mb-3">3. Lien vers le compte/vidéo</h6>
+                        <div class="mb-3">
+                            <label for="profileLink" class="form-label">
+                                <i class="fas fa-link me-2"></i>Collez le lien complet
+                            </label>
+                            <input type="url" id="profileLink" class="form-control" 
+                                   placeholder="https://www.tiktok.com/@votrecompte" 
+                                   required>
+                            <div class="form-text">
+                                Assurez-vous que le compte n'est pas privé
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Étape 4: Quantité (visible après choix service) -->
+                    <div class="quantity-selector mb-4" id="quantityStep" style="display: none;">
+                        <h6 class="mb-3">4. Quantité souhaitée</h6>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" type="button" onclick="changeQuantity(-1000)">-</button>
+                            <input type="number" id="quantityInput" value="1000" min="1000" max="1000000" step="1000">
+                            <button class="quantity-btn" type="button" onclick="changeQuantity(1000)">+</button>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <small class="text-muted">Minimum: 1000 | Maximum: 1,000,000</small>
+                        </div>
+                    </div>
+
+                    <!-- Récapitulatif du prix (visible après choix service) -->
+                    <div class="price-summary mb-4" id="priceSummary" style="display: none;">
+                        <h6 class="mb-3">Récapitulatif du prix</h6>
+                        <div class="price-item">
+                            <span>Service:</span>
+                            <span id="selectedService">-</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Prix unitaire:</span>
+                            <span id="unitPrice">-</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Quantité:</span>
+                            <span id="selectedQuantity">-</span>
+                        </div>
+                        <div class="price-total">
+                            <span>Prix Total:</span>
+                            <span id="totalPrice">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Conditions -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="termsCheck">
+                        <label class="form-check-label" for="termsCheck">
+                            J'accepte les <a href="#" class="text-primary">conditions générales</a> et la <a href="#" class="text-primary">politique de confidentialité</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmOrderBtn" onclick="confirmOrder()" disabled>Confirmer la Commande</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Logo background particles
+        // Données des services par plateforme
+        const servicesData = {
+            tiktok: [
+                { name: 'Followers', price: 0.40 },
+                { name: 'J\'aime (Likes)', price: 0.35 },
+                { name: 'Vues', price: 0.30 },
+                { name: 'Sauvegardes', price: 0.45 },
+                { name: 'Partages', price: 0.50 },
+                { name: 'Commentaires', price: 0.60 },
+                { name: 'Personnalisés', price: 0.70 },
+                { name: 'J\'aime sur Live', price: 0.80 }
+            ],
+            instagram: [
+                { name: 'Followers', price: 0.45 },
+                { name: 'J\'aime (Likes)', price: 0.35 },
+                { name: 'Vues', price: 0.25 },
+                { name: 'Commentaires', price: 0.55 },
+                { name: 'Vues Story', price: 0.30 },
+                { name: 'Abonnés', price: 0.40 }
+            ],
+            facebook: [
+                { name: 'Abonnés Page', price: 0.40 },
+                { name: 'Abonnés Profil', price: 0.35 },
+                { name: 'J\'aime Publications', price: 0.30 },
+                { name: 'Réactions Émoji', price: 0.25 },
+                { name: 'Partages', price: 0.45 },
+                { name: 'Membres Groupe', price: 0.50 },
+                { name: 'Vues Vidéo', price: 0.35 },
+                { name: 'Vues Reel', price: 0.40 },
+                { name: 'Commentaires', price: 0.55 },
+                { name: 'Avis Page', price: 0.60 }
+            ],
+            telegram: [
+                { name: 'Membres Groupe', price: 0.50 },
+                { name: 'Vues Publication', price: 0.30 },
+                { name: 'Vues Future', price: 0.35 },
+                { name: 'Réactions Publication', price: 0.40 }
+            ],
+            twitter: [
+                { name: 'Followers', price: 0.35 },
+                { name: 'Likes', price: 0.25 },
+                { name: 'Retweets', price: 0.30 },
+                { name: 'Republication', price: 0.40 },
+                { name: 'Commentaires', price: 0.45 }
+            ],
+            youtube: [
+                { name: 'Abonnés', price: 0.50 },
+                { name: 'Vues', price: 0.40 },
+                { name: 'Commentaires', price: 0.60 },
+                { name: 'J\'aime (Likes)', price: 0.35 }
+            ],
+            whatsapp: [
+                { name: 'Abonnés Chaîne', price: 0.45 },
+                { name: 'Réactions Chaîne', price: 0.35 }
+            ]
+        };
+
+        // Variables globales
+        let selectedPlatform = null;
+        let selectedService = null;
+        let unitPrice = 0;
+        let quantity = 1000;
+        let orderData = {
+            platform: null,
+            service: null,
+            price: 0,
+            quantity: 0,
+            total: 0,
+            link: ''
+        };
+
+        // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
+            // Logo background particles
             const logoBg = document.querySelector('.logo-bg-animation');
             const particleCount = 15;
             
@@ -1264,16 +1740,13 @@
                 const particle = document.createElement('div');
                 particle.className = 'logo-particle';
                 
-                // Random position
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
                 
-                // Random size
                 const size = 40 + Math.random() * 60;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 
-                // Random animation
                 const duration = 20 + Math.random() * 20;
                 const delay = Math.random() * 20;
                 particle.style.animationDuration = duration + 's';
@@ -1282,27 +1755,20 @@
                 logoBg.appendChild(particle);
             }
             
-            // Scroll animations
+            // Animations au défilement
             const animateElements = document.querySelectorAll('.animate-on-scroll');
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     }
                 });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
             
-            animateElements.forEach(element => {
-                observer.observe(element);
-            });
+            animateElements.forEach(element => observer.observe(element));
             
-            // Navbar scroll effect
+            // Navigation scroll effect
             const navbar = document.querySelector('.navbar');
-            
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
@@ -1310,11 +1776,10 @@
                     navbar.classList.remove('scrolled');
                 }
                 
-                // Active nav link
                 const sections = document.querySelectorAll('section[id]');
                 const navLinks = document.querySelectorAll('.nav-link');
-                
                 let current = '';
+                
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
                     const sectionHeight = section.clientHeight;
@@ -1331,10 +1796,9 @@
                 });
             });
             
-            // Mobile menu close on click
+            // Menu mobile close on click
             const navLinks = document.querySelectorAll('.nav-link');
             const navbarCollapse = document.querySelector('.navbar-collapse');
-            
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth < 992) {
@@ -1344,14 +1808,47 @@
                 });
             });
             
+            // Platform selection in modal
+            const platformOptions = document.querySelectorAll('.platform-option');
+            platformOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    platformOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedPlatform = this.dataset.platform;
+                    showServicesForPlatform(selectedPlatform);
+                });
+            });
+            
+            // Validation du lien en temps réel
+            const profileLinkInput = document.getElementById('profileLink');
+            profileLinkInput.addEventListener('input', function() {
+                validateOrder();
+            });
+            
+            // Validation des conditions
+            const termsCheck = document.getElementById('termsCheck');
+            termsCheck.addEventListener('change', function() {
+                validateOrder();
+            });
+            
+            // Quantité input
+            const quantityInput = document.getElementById('quantityInput');
+            quantityInput.addEventListener('change', function() {
+                let value = parseInt(this.value);
+                if (value < 1000) value = 1000;
+                if (value > 1000000) value = 1000000;
+                this.value = value;
+                quantity = value;
+                updatePrice();
+                validateOrder();
+            });
+            
             // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
@@ -1362,6 +1859,177 @@
                 });
             });
         });
+        
+        // Affiche les services pour une plateforme
+        function showServicesForPlatform(platform) {
+            const serviceOptions = document.getElementById('serviceOptions');
+            const services = servicesData[platform];
+            
+            serviceOptions.innerHTML = '';
+            
+            services.forEach(service => {
+                const option = document.createElement('div');
+                option.className = 'service-option';
+                option.dataset.service = service.name;
+                option.dataset.price = service.price;
+                
+                option.innerHTML = `
+                    <div class="service-name">${service.name}</div>
+                    <div class="service-price">${service.price.toFixed(2)} XOF / 1000</div>
+                `;
+                
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.service-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    selectedService = this.dataset.service;
+                    unitPrice = parseFloat(this.dataset.price);
+                    showNextSteps();
+                });
+                
+                serviceOptions.appendChild(option);
+            });
+            
+            // Afficher l'étape des services
+            document.getElementById('serviceStep').style.display = 'block';
+        }
+        
+        // Affiche les étapes suivantes
+        function showNextSteps() {
+            document.getElementById('linkStep').style.display = 'block';
+            document.getElementById('quantityStep').style.display = 'block';
+            document.getElementById('priceSummary').style.display = 'block';
+            
+            // Mettre à jour l'affichage
+            document.getElementById('selectedService').textContent = `${selectedService} (${selectedPlatform})`;
+            updatePrice();
+            validateOrder();
+        }
+        
+        // Change la quantité
+        function changeQuantity(amount) {
+            const quantityInput = document.getElementById('quantityInput');
+            let newQuantity = parseInt(quantityInput.value) + amount;
+            
+            if (newQuantity < 1000) newQuantity = 1000;
+            if (newQuantity > 1000000) newQuantity = 1000000;
+            
+            quantityInput.value = newQuantity;
+            quantity = newQuantity;
+            updatePrice();
+            validateOrder();
+        }
+        
+        // Met à jour le prix
+        function updatePrice() {
+            if (!selectedService || !unitPrice) return;
+            
+            const total = (quantity / 1000) * unitPrice;
+            
+            document.getElementById('unitPrice').textContent = `${unitPrice.toFixed(2)} XOF / 1000`;
+            document.getElementById('selectedQuantity').textContent = quantity.toLocaleString();
+            document.getElementById('totalPrice').textContent = `${total.toFixed(2)} XOF`;
+            
+            // Mettre à jour les données de commande
+            orderData.platform = selectedPlatform;
+            orderData.service = selectedService;
+            orderData.price = unitPrice;
+            orderData.quantity = quantity;
+            orderData.total = total;
+        }
+        
+        // Valide la commande
+        function validateOrder() {
+            const profileLink = document.getElementById('profileLink').value;
+            const termsCheck = document.getElementById('termsCheck').checked;
+            const confirmBtn = document.getElementById('confirmOrderBtn');
+            
+            const isValid = selectedPlatform && 
+                           selectedService && 
+                           profileLink && 
+                           profileLink.includes('http') && 
+                           termsCheck;
+            
+            confirmBtn.disabled = !isValid;
+            return isValid;
+        }
+        
+        // Ouvre la modal de commande
+        function openOrderModal(platform = null) {
+            // Réinitialiser la modal
+            resetModal();
+            
+            // Si une plateforme est spécifiée, la sélectionner
+            if (platform && servicesData[platform]) {
+                const platformElement = document.querySelector(`.platform-option[data-platform="${platform}"]`);
+                if (platformElement) {
+                    platformElement.click();
+                }
+            }
+            
+            // Afficher la modal
+            const modal = new bootstrap.Modal(document.getElementById('orderModal'));
+            modal.show();
+        }
+        
+        // Réinitialise la modal
+        function resetModal() {
+            selectedPlatform = null;
+            selectedService = null;
+            unitPrice = 0;
+            quantity = 1000;
+            
+            // Réinitialiser les sélections
+            document.querySelectorAll('.platform-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.service-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Réinitialiser les champs
+            document.getElementById('profileLink').value = '';
+            document.getElementById('quantityInput').value = '1000';
+            document.getElementById('termsCheck').checked = false;
+            
+            // Cacher les étapes
+            document.getElementById('serviceStep').style.display = 'none';
+            document.getElementById('linkStep').style.display = 'none';
+            document.getElementById('quantityStep').style.display = 'none';
+            document.getElementById('priceSummary').style.display = 'none';
+            
+            // Désactiver le bouton de confirmation
+            document.getElementById('confirmOrderBtn').disabled = true;
+        }
+        
+        // Confirme la commande
+        function confirmOrder() {
+            if (!validateOrder()) {
+                alert('Veuillez remplir tous les champs requis.');
+                return;
+            }
+            
+            // Récupérer le lien
+            orderData.link = document.getElementById('profileLink').value;
+            
+            // Ici, vous enverriez normalement les données à votre backend
+            alert(`Commande confirmée!\n\n` +
+                  `Plateforme: ${orderData.platform}\n` +
+                  `Service: ${orderData.service}\n` +
+                  `Quantité: ${orderData.quantity.toLocaleString()}\n` +
+                  `Prix total: ${orderData.total.toFixed(2)} XOF\n\n` +
+                  `Lien: ${orderData.link}\n\n` +
+                  `Vous serez redirigé vers la page de paiement.`);
+            
+            // Fermer la modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+            modal.hide();
+            
+            // Redirection vers la page de paiement (à implémenter)
+            // window.location.href = `checkout.php?platform=${orderData.platform}&service=${encodeURIComponent(orderData.service)}&quantity=${orderData.quantity}&total=${orderData.total}&link=${encodeURIComponent(orderData.link)}`;
+        }
     </script>
 </body>
 </html>
