@@ -478,33 +478,264 @@
 
         /* Testimonials */
         .testimonials {
-            background: var(--gradient-dark);
+            background: linear-gradient(135deg, var(--gradient-dark) 0%, #1a1a2e 50%, #16213e 100%);
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><polygon points="30 30 0 0 60 0"/></g></svg>');
+            pointer-events: none;
         }
 
         .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
             padding: 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             height: 100%;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 120px;
+            font-weight: 900;
+            color: var(--primary);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
         }
 
         .testimonial-text {
             font-size: 1.125rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
             gap: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+            box-shadow: 0 8px 16px rgba(255, 107, 53, 0.3);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover .author-avatar {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 12px 24px rgba(255, 107, 53, 0.4);
+        }
+
+        .author-info h6 {
+            color: white;
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .testimonial-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item-small {
+            text-align: center;
+        }
+
+        .stat-number-small {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-label-small {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Video Testimonials */
+        .video-testimonials {
+            background: linear-gradient(135deg, var(--gradient-dark) 0%, #1a1a2e 50%, #16213e 100%);
+            color: rgb(240, 103, 5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><polygon points="30 30 0 0 60 0"/></g></svg>');
+            pointer-events: none;
+        }
+
+        .video-testimonial-card {
+            background: rgba(11, 7, 36, 0.993);
+            backdrop-filter: blur(20px);
+            border-radius: 2rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 100%;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-testimonial-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(11, 7, 36, 0.903);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 1rem;
+        }
+
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.6);
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 2rem;
+            margin-left: 5px;
+        }
+
+        .video-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .video-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .author-avatar-video {
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -514,7 +745,103 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .author-info-video h6 {
+            color: white;
+            margin: 0;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .author-info-video p {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .video-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .video-stat-item i {
+            color: var(--primary);
+        }
+
+        /* Video Modal Styles */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-modal-content video {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            display: block;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .video-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .video-modal-close i {
+            color: white;
+            font-size: 1.5rem;
         }
 
         /* CTA */
@@ -855,7 +1182,6 @@
 
         .payment-methods {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
             margin-top: 1.5rem;
         }
@@ -870,6 +1196,133 @@
         .payment-methods img:hover {
             filter: grayscale(0%) brightness(100%);
             opacity: 1;
+        }
+
+        /* Progress Bar Styles */
+        .progress-container {
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1030;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.1);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .progress-step.active .step-number {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        .progress-step.completed .step-number {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            color: #6c757d;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .progress-step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .progress-step.completed .step-label {
+            color: #28a745;
+        }
+
+        .progress-bar-container {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-top: 1rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, #ff6b35 100%);
+            transition: width 0.5s ease;
+            border-radius: 2px;
+            width: 20%;
+        }
+
+        /* Enhanced Service Options */
+        .service-option {
+            padding: 1.25rem;
+            border: 2px solid #e9ecef;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-option:hover {
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.02);
+            transform: translateX(5px);
+        }
+
+        .service-option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
+        }
+
+        .service-price-tag {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
         }
 
         /* Responsive */
@@ -976,35 +1429,126 @@
             
             .service-option {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
             }
-        }
 
-        /* Animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition);
-        }
+            .service-option:hover {
+                border-color: var(--primary);
+                background: rgba(255, 107, 53, 0.02);
+                transform: translateX(5px);
+            }
 
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+            .service-option.selected {
+                border-color: var(--primary);
+                background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
+                box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
+            }
 
-        /* Floating Animation */
-        @keyframes float {
-            0%, 100% {
+            .service-price-tag {
+                background: var(--primary);
+                color: white;
+                padding: 0.25rem 0.75rem;
+                border-radius: 2rem;
+                font-size: 0.875rem;
+                font-weight: 600;
+            }
+
+            /* Enhanced Form Controls */
+            .form-control:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+            }
+
+            .quantity-controls {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                background: #f8f9fa;
+                padding: 0.5rem;
+                border-radius: 0.75rem;
+            }
+
+            .quantity-btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 2px solid var(--primary);
+                background: white;
+                color: var(--primary);
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .quantity-btn:hover {
+                background: var(--primary);
+                color: white;
+                transform: scale(1.1);
+            }
+
+            .quantity-controls input {
+                border: none;
+                background: transparent;
+                text-align: center;
+                font-weight: 600;
+                font-size: 1.125rem;
+                width: 100px;
+            }
+
+            /* Enhanced Price Summary */
+            .price-summary {
+                background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
+                border: 2px solid rgba(255, 107, 53, 0.1);
+                border-radius: 1rem;
+                padding: 1.5rem;
+            }
+
+            .price-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .price-item:last-child {
+                border-bottom: none;
+            }
+
+            .price-total {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem 0 0 0;
+                margin-top: 0.5rem;
+                border-top: 2px solid rgba(255, 107, 53, 0.2);
+                font-weight: 700;
+                font-size: 1.125rem;
+                color: var(--primary);
+            }
+
+            /* Animations */
+            .animate-on-scroll {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: var(--transition);
+            }
+
+            .animate-on-scroll.visible {
+                opacity: 1;
                 transform: translateY(0);
             }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
 
-        .floating {
-            animation: float 6s ease-in-out infinite;
+            /* Floating Animation */
+            @keyframes float {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-20px);
+                }
+            }
         }
     </style>
 </head>
@@ -1039,7 +1583,7 @@
                         <a class="nav-link" href="#features">Avantages</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#testimonials">Avis</a>
+                        <a class="nav-link" href="#testimonials">Témoignages</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -1078,67 +1622,30 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="hero-illustration text-center mt-5 mt-lg-0">
-                        <div class="position-relative">
-                            <div class="floating">
-                                <div class="d-flex justify-content-center">
-                                    <div class="bg-white rounded-4 p-4 shadow-lg" style="max-width: 400px; margin: 0 auto;">
-                                        <div class="row g-3">
-                                            <div class="col-6">
-                                                <div class="bg-primary-light rounded-3 p-3 text-center">
-                                                    <i class="fab fa-tiktok fa-2x text-primary"></i>
-                                                    <p class="mt-2 fw-bold">TikTok</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="bg-primary-light rounded-3 p-3 text-center">
-                                                    <i class="fab fa-instagram fa-2x text-primary"></i>
-                                                    <p class="mt-2 fw-bold">Instagram</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="bg-primary-light rounded-3 p-3 text-center">
-                                                    <i class="fab fa-youtube fa-2x text-primary"></i>
-                                                    <p class="mt-2 fw-bold">YouTube</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="bg-primary-light rounded-3 p-3 text-center">
-                                                    <i class="fab fa-facebook fa-2x text-primary"></i>
-                                                    <p class="mt-2 fw-bold">Facebook</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="hero-stats animate-on-scroll" style="animation-delay: 0.4s">
+                        <div class="row text-center">
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number">15K+</div>
+                                    <div class="stat-label">Clients</div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="hero-stats animate-on-scroll" style="animation-delay: 0.4s">
-                            <div class="row text-center">
-                                <div class="col-6 col-md-3">
-                                    <div class="stat-item">
-                                        <div class="stat-number">15K+</div>
-                                        <div class="stat-label">Clients</div>
-                                    </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number">380K</div>
+                                    <div class="stat-label">Commandes</div>
                                 </div>
-                                <div class="col-6 col-md-3">
-                                    <div class="stat-item">
-                                        <div class="stat-number">380K</div>
-                                        <div class="stat-label">Commandes</div>
-                                    </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number">99%</div>
+                                    <div class="stat-label">Satisfaction</div>
                                 </div>
-                                <div class="col-6 col-md-3">
-                                    <div class="stat-item">
-                                        <div class="stat-number">99%</div>
-                                        <div class="stat-label">Satisfaction</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-md-3">
-                                    <div class="stat-item">
-                                        <div class="stat-number">24/7</div>
-                                        <div class="stat-label">Support</div>
-                                    </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-item">
+                                    <div class="stat-number">24/7</div>
+                                    <div class="stat-label">Support</div>
                                 </div>
                             </div>
                         </div>
@@ -1380,63 +1887,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="section testimonials">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2 style="color: white;">Ce Que Disent Nos Clients</h2>
-                <p style="color: rgba(255, 255, 255, 0.8)">Découvrez les expériences de nos clients satisfaits</p>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="testimonial-card animate-on-scroll">
-                        <div class="testimonial-text">
-                            "Service exceptionnel ! J'ai commandé des followers TikTok et ils ont été livrés en moins de 2 heures. Qualité impeccable !"
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SA</div>
-                            <div>
-                                <h6 style="color: white;">Sarah A.</h6>
-                                <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">Influenceuse TikTok</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="testimonial-card animate-on-scroll" style="animation-delay: 0.1s">
-                        <div class="testimonial-text">
-                            "Je recommande LKSBoost à tous les créateurs de contenu. Le support est réactif et les résultats sont au rendez-vous."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">MK</div>
-                            <div>
-                                <h6 style="color: white;">Mohamed K.</h6>
-                                <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">YouTubeur</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6">
-                    <div class="testimonial-card animate-on-scroll" style="animation-delay: 0.2s">
-                        <div class="testimonial-text">
-                            "Service rapide et fiable. J'ai augmenté ma visibilité sur Instagram grâce à leurs services de likes et commentaires."
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">LF</div>
-                            <div>
-                                <h6 style="color: white;">Laura F.</h6>
-                                <p style="color: rgba(255, 255, 255, 0.7); margin: 0;">Entrepreneure</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -1448,12 +1898,80 @@
                         <i class="fas fa-shopping-cart me-2"></i>Commander Maintenant
                     </button>
                     <a href="#contact" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-question-circle me-2"></i>Nous Contacter
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Video Testimonials -->
+    <section id="testimonials" class="section video-testimonials">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2 style="color: rgb(252, 153, 4);">Témoignages Vidéo de Nos Clients</h2>
+                <p style="color: rgba(0, 0, 0, 0.8)">Découvrez les expériences authentiques de nos clients satisfaits</p>
+            </div>
+            
+            <!-- Vidéos principales -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="video-testimonial-card animate-on-scroll">
+                        <div class="video-container">
+                            <video poster="" preload="metadata">
+                                <source src="TEMOIGNAGE1.mp4" type="video/mp4">
+                                Votre navigateur ne supporte pas les vidéos HTML5.
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-button" onclick="openVideoModal('TEMOIGNAGE1.mp4', 'Sarah Amadou - TikTok Influenceuse')">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Sarah Amadou - TikTok Influenceuse</h3>
+                            <p class="video-description">
+                                "J'ai commandé 10,000 followers TikTok et ils ont été livrés en moins de 2 heures. La qualité est impeccable et le support client est très réactif!"
+                            </p>
+                            <div class="video-author">
+                                <div class="author-avatar-video">SA</div>
+                                <div class="author-info-video">
+                                    <h6>Sarah Amadou</h6>
+                                    <p>Influenceuse TikTok • 250K abonnés</p>
+                                </div>
+                            </div>
+                            <div class="video-stats">
+                                <div class="video-stat-item">
+                                    <i class="fas fa-eye"></i>
+                                    <span>15K vues</span>
+                                </div>
+                                <div class="video-stat-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>98% satisfaction</span>
+                                </div>
+                                <div class="video-stat-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>2:30</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-close" onclick="closeVideoModal()">
+                <i class="fas fa-times"></i>
+            </div>
+            <video id="modalVideo" controls autoplay>
+                <source src="" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="contact" class="footer">
@@ -1547,6 +2065,36 @@
                     <h5 class="modal-title" id="orderModalLabel">Commander un Service</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-container mb-4">
+                    <div class="progress-steps">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Plateforme</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Service</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Lien</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Quantité</div>
+                        </div>
+                        <div class="progress-step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-label">Paiement</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progressBar" style="width: 20%"></div>
+                    </div>
+                </div>
+                
                 <div class="modal-body">
                     <!-- Étape 1: Choix de la plateforme -->
                     <div class="mb-4" id="platformStep">
@@ -1721,6 +2269,7 @@
         let selectedService = null;
         let unitPrice = 0;
         let quantity = 1000;
+        let currentStep = 1;
         let orderData = {
             platform: null,
             service: null,
@@ -1729,6 +2278,26 @@
             total: 0,
             link: ''
         };
+
+        // Progress bar functionality
+        function updateProgress(step) {
+            const progressSteps = document.querySelectorAll('.progress-step');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = (step / 5) * 100;
+            
+            progressBar.style.width = progressPercentage + '%';
+            
+            progressSteps.forEach((progressStep, index) => {
+                progressStep.classList.remove('active', 'completed');
+                if (index < step - 1) {
+                    progressStep.classList.add('completed');
+                } else if (index === step - 1) {
+                    progressStep.classList.add('active');
+                }
+            });
+            
+            currentStep = step;
+        }
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -1816,6 +2385,7 @@
                     this.classList.add('selected');
                     selectedPlatform = this.dataset.platform;
                     showServicesForPlatform(selectedPlatform);
+                    updateProgress(2);
                 });
             });
             
@@ -1904,6 +2474,7 @@
             // Mettre à jour l'affichage
             document.getElementById('selectedService').textContent = `${selectedService} (${selectedPlatform})`;
             updatePrice();
+            updateProgress(3);
             validateOrder();
         }
         
@@ -1919,6 +2490,11 @@
             quantity = newQuantity;
             updatePrice();
             validateOrder();
+            
+            // Mettre à jour la progression si toutes les autres étapes sont validées
+            if (selectedPlatform && selectedService && document.getElementById('profileLink').value) {
+                updateProgress(4);
+            }
         }
         
         // Met à jour le prix
@@ -1994,7 +2570,7 @@
             document.getElementById('quantityInput').value = '1000';
             document.getElementById('termsCheck').checked = false;
             
-            // Cacher les étapes
+            // Cacher les étapes sauf la première
             document.getElementById('serviceStep').style.display = 'none';
             document.getElementById('linkStep').style.display = 'none';
             document.getElementById('quantityStep').style.display = 'none';
@@ -2002,6 +2578,9 @@
             
             // Désactiver le bouton de confirmation
             document.getElementById('confirmOrderBtn').disabled = true;
+            
+            // Réinitialiser la progression
+            updateProgress(1);
         }
         
         // Confirme la commande
@@ -2013,6 +2592,9 @@
             
             // Récupérer le lien
             orderData.link = document.getElementById('profileLink').value;
+            
+            // Mettre à jour la progression à 100%
+            updateProgress(5);
             
             // Ici, vous enverriez normalement les données à votre backend
             alert(`Commande confirmée!\n\n` +
@@ -2030,6 +2612,66 @@
             // Redirection vers la page de paiement (à implémenter)
             // window.location.href = `checkout.php?platform=${orderData.platform}&service=${encodeURIComponent(orderData.service)}&quantity=${orderData.quantity}&total=${orderData.total}&link=${encodeURIComponent(orderData.link)}`;
         }
+        
+        // Valide la commande
+        function validateOrder() {
+            const profileLink = document.getElementById('profileLink').value;
+            const termsCheck = document.getElementById('termsCheck').checked;
+            const confirmBtn = document.getElementById('confirmOrderBtn');
+            
+            const isValid = selectedPlatform && 
+                           selectedService && 
+                           profileLink && 
+                           profileLink.includes('http') && 
+                           termsCheck;
+            
+            confirmBtn.disabled = !isValid;
+            return isValid;
+            const modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
+            modal.hide();
+            
+            // Redirection vers la page de paiement (à implémenter)
+            // window.location.href = `checkout.php?platform=${orderData.platform}&service=${encodeURIComponent(orderData.service)}&quantity=${orderData.quantity}&total=${orderData.total}&link=${encodeURIComponent(orderData.link)}`;
+        }
+
+        // Fonctions pour le modal vidéo
+        function openVideoModal(videoSrc, videoTitle) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            video.src = videoSrc;
+            video.title = videoTitle;
+            modal.classList.add('active');
+            
+            // Empêcher le scroll du body quand le modal est ouvert
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            video.pause();
+            video.src = '';
+            modal.classList.remove('active');
+            
+            // Réactiver le scroll du body
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fermer le modal en cliquant sur le fond
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        // Fermer le modal avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
     </script>
 </body>
 </html>
