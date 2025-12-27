@@ -491,7 +491,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><polygon points="30 30 0 0 60 0"/></g></svg>');
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><polygon points="30 30 0 0 60 0"/></g></g></svg>');
             pointer-events: none;
         }
 
@@ -624,7 +624,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><polygon points="30 30 0 0 60 0"/></g></svg>');
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><polygon points="30 30 0 0 60 0"/></g></g></svg>');
             pointer-events: none;
         }
 
@@ -880,6 +880,7 @@
             border-radius: 1.5rem;
             border: none;
             box-shadow: var(--shadow-lg);
+            max-height: 90vh;
         }
 
         .order-modal .modal-header {
@@ -888,6 +889,9 @@
             border-radius: 1.5rem 1.5rem 0 0;
             padding: 1.5rem 2rem;
             border-bottom: none;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .order-modal .modal-title {
@@ -902,6 +906,8 @@
 
         .order-modal .modal-body {
             padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(90vh - 150px);
         }
 
         /* Platform Selection */
@@ -1078,6 +1084,12 @@
         .modal-footer {
             border-top: 1px solid var(--gray-light);
             padding: 1.5rem 2rem;
+            position: sticky;
+            bottom: 0;
+            background: white;
+            border-radius: 0 0 1.5rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
         }
 
         /* Footer */
@@ -1200,13 +1212,8 @@
 
         /* Progress Bar Styles */
         .progress-container {
-            padding: 1.5rem 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            background: white;
             box-shadow: var(--shadow-sm);
             z-index: 1030;
             border-bottom: 1px solid rgba(255, 107, 0, 0.1);
@@ -1291,38 +1298,125 @@
             width: 20%;
         }
 
-        /* Enhanced Service Options */
-        .service-option {
-            padding: 1.25rem;
-            border: 2px solid #e9ecef;
+        /* Warnings Section */
+        .warnings-section {
+            margin-bottom: 2rem;
+        }
+
+        .warning-card {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8d9 100%);
+            border-left: 4px solid var(--primary);
             border-radius: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-card .warning-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-card .warning-title i {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .warning-card .warning-title h6 {
+            margin: 0;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .warning-card p {
+            margin: 0;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        /* Order Steps Navigation */
+        .order-step {
+            display: none;
+        }
+
+        .order-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Form Controls */
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Modal Step Controls */
+        .step-buttons {
             display: flex;
             justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Services Grid */
+        .service-mini-card {
+            background: white;
+            border: 2px solid var(--gray-light);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .service-mini-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .service-mini-card.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .service-mini-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
-        }
-
-        .service-option:hover {
-            border-color: var(--primary);
-            background: rgba(255, 107, 53, 0.02);
-            transform: translateX(5px);
-        }
-
-        .service-option.selected {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
-        }
-
-        .service-price-tag {
-            background: var(--primary);
+            justify-content: center;
             color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 2rem;
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
         }
 
         /* Responsive */
@@ -1351,6 +1445,10 @@
             
             .section-title h2 {
                 font-size: 2.25rem;
+            }
+            
+            .order-modal .modal-body {
+                max-height: calc(90vh - 200px);
             }
         }
 
@@ -1393,6 +1491,14 @@
             .order-modal .modal-body {
                 padding: 1.5rem;
             }
+            
+            .progress-container {
+                padding: 1rem;
+            }
+            
+            .step-label {
+                font-size: 0.7rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1427,127 +1533,17 @@
                 grid-template-columns: 1fr;
             }
             
-            .service-option {
+            .order-modal .modal-dialog {
+                margin: 10px;
+            }
+            
+            .modal-footer {
                 flex-direction: column;
+                gap: 10px;
             }
-
-            .service-option:hover {
-                border-color: var(--primary);
-                background: rgba(255, 107, 53, 0.02);
-                transform: translateX(5px);
-            }
-
-            .service-option.selected {
-                border-color: var(--primary);
-                background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
-                box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
-            }
-
-            .service-price-tag {
-                background: var(--primary);
-                color: white;
-                padding: 0.25rem 0.75rem;
-                border-radius: 2rem;
-                font-size: 0.875rem;
-                font-weight: 600;
-            }
-
-            /* Enhanced Form Controls */
-            .form-control:focus {
-                border-color: var(--primary);
-                box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
-            }
-
-            .quantity-controls {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 1rem;
-                background: #f8f9fa;
-                padding: 0.5rem;
-                border-radius: 0.75rem;
-            }
-
-            .quantity-btn {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 2px solid var(--primary);
-                background: white;
-                color: var(--primary);
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .quantity-btn:hover {
-                background: var(--primary);
-                color: white;
-                transform: scale(1.1);
-            }
-
-            .quantity-controls input {
-                border: none;
-                background: transparent;
-                text-align: center;
-                font-weight: 600;
-                font-size: 1.125rem;
-                width: 100px;
-            }
-
-            /* Enhanced Price Summary */
-            .price-summary {
-                background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
-                border: 2px solid rgba(255, 107, 53, 0.1);
-                border-radius: 1rem;
-                padding: 1.5rem;
-            }
-
-            .price-item {
-                display: flex;
-                justify-content: space-between;
-                padding: 0.5rem 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            }
-
-            .price-item:last-child {
-                border-bottom: none;
-            }
-
-            .price-total {
-                display: flex;
-                justify-content: space-between;
-                padding: 1rem 0 0 0;
-                margin-top: 0.5rem;
-                border-top: 2px solid rgba(255, 107, 53, 0.2);
-                font-weight: 700;
-                font-size: 1.125rem;
-                color: var(--primary);
-            }
-
-            /* Animations */
-            .animate-on-scroll {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: var(--transition);
-            }
-
-            .animate-on-scroll.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            /* Floating Animation */
-            @keyframes float {
-                0%, 100% {
-                    transform: translateY(0);
-                }
-                50% {
-                    transform: translateY(-20px);
-                }
+            
+            .modal-footer .btn {
+                width: 100%;
             }
         }
     </style>
@@ -1670,8 +1666,8 @@
                             <i class="fab fa-tiktok"></i>
                         </div>
                         <h4>Followers TikTok</h4>
-                        <p class="text-muted mb-3">Augmentez vos followers TikTok avec des comptes de qualité</p>
-                        <div class="service-price">0.40 XOF / 1000</div>
+                        <p class="text-muted mb-3">Augmentez vos followers TikTok avec des comptes de haute qualité</p>
+                        <div class="service-price">1 984 CFA / 1000</div>
                         <ul class="service-features">
                             <li><i class="fas fa-check"></i> Livraison en 2 heures</li>
                             <li><i class="fas fa-check"></i> Followers actifs</li>
@@ -1687,12 +1683,12 @@
                         <div class="service-icon">
                             <i class="fab fa-instagram"></i>
                         </div>
-                        <h4>Likes Instagram</h4>
+                        <h4>Abonnés Instagram</h4>
                         <p class="text-muted mb-3">Boostez votre engagement sur Instagram instantanément</p>
-                        <div class="service-price">0.35 XOF / 1000</div>
+                        <div class="service-price">2 070 CFA / 1000</div>
                         <ul class="service-features">
                             <li><i class="fas fa-check"></i> Livraison instantanée</li>
-                            <li><i class="fas fa-check"></i> Likes réels</li>
+                            <li><i class="fas fa-check"></i> Abonnés réels</li>
                             <li><i class="fas fa-check"></i> Mélange démographique</li>
                             <li><i class="fas fa-check"></i> Sécurisé</li>
                         </ul>
@@ -1705,11 +1701,11 @@
                         <div class="service-icon">
                             <i class="fab fa-youtube"></i>
                         </div>
-                        <h4>Vues YouTube</h4>
+                        <h4>Abonnés YouTube</h4>
                         <p class="text-muted mb-3">Augmentez la visibilité de vos vidéos YouTube</p>
-                        <div class="service-price">0.50 XOF / 1000</div>
+                        <div class="service-price">15 664 CFA / 1000</div>
                         <ul class="service-features">
-                            <li><i class="fas fa-check"></i> Vues du monde entier</li>
+                            <li><i class="fas fa-check"></i> Abonnés du monde entier</li>
                             <li><i class="fas fa-check"></i> Démarrage en 24h</li>
                             <li><i class="fas fa-check"></i> Compatible toutes vidéos</li>
                             <li><i class="fas fa-check"></i> Rétention élevée</li>
@@ -1742,7 +1738,7 @@
                             <i class="fab fa-tiktok"></i>
                         </div>
                         <h4>TikTok</h4>
-                        <p class="text-muted">Followers, J'aime, Vues, Sauvegardes, Partages, Commentaires, Personnalisés, J'aime Live</p>
+                        <p class="text-muted">Followers, J'aime, Vues, Commentaires, Live Likes, Live Viewers</p>
                         <div class="mt-3">
                             <button class="btn btn-sm btn-primary" onclick="openOrderModal('tiktok')">Commander</button>
                         </div>
@@ -1755,7 +1751,7 @@
                             <i class="fab fa-instagram"></i>
                         </div>
                         <h4>Instagram</h4>
-                        <p class="text-muted">Followers, J'aime, Vues, Commentaires, Vues Story, Abonnés</p>
+                        <p class="text-muted">Followers, J'aime, Vues, Commentaires, Vues Story</p>
                         <div class="mt-3">
                             <button class="btn btn-sm btn-primary" onclick="openOrderModal('instagram')">Commander</button>
                         </div>
@@ -1820,7 +1816,7 @@
                             <i class="fab fa-whatsapp"></i>
                         </div>
                         <h4>WhatsApp</h4>
-                        <p class="text-muted">Abonnés Chaîne, Réactions Chaîne</p>
+                        <p class="text-muted">Membres Chaîne, Réactions Chaîne</p>
                         <div class="mt-3">
                             <button class="btn btn-sm btn-primary" onclick="openOrderModal('whatsapp')">Commander</button>
                         </div>
@@ -1898,6 +1894,7 @@
                         <i class="fas fa-shopping-cart me-2"></i>Commander Maintenant
                     </button>
                     <a href="#contact" class="btn btn-outline-light btn-lg">
+                        Nous Contacter
                     </a>
                 </div>
             </div>
@@ -2007,9 +2004,9 @@
                     <h5>Services</h5>
                     <ul class="footer-links">
                         <li><a href="#" onclick="openOrderModal('tiktok')"><i class="fas fa-chevron-right"></i> Followers TikTok</a></li>
-                        <li><a href="#" onclick="openOrderModal('instagram')"><i class="fas fa-chevron-right"></i> Likes Instagram</a></li>
-                        <li><a href="#" onclick="openOrderModal('youtube')"><i class="fas fa-chevron-right"></i> Vues YouTube</a></li>
-                        <li><a href="#" onclick="openOrderModal('facebook')"><i class="fas fa-chevron-right"></i> Followers Facebook</a></li>
+                        <li><a href="#" onclick="openOrderModal('instagram')"><i class="fas fa-chevron-right"></i> Abonnés Instagram</a></li>
+                        <li><a href="#" onclick="openOrderModal('youtube')"><i class="fas fa-chevron-right"></i> Abonnés YouTube</a></li>
+                        <li><a href="#" onclick="openOrderModal('facebook')"><i class="fas fa-chevron-right"></i> Abonnés Facebook</a></li>
                         <li><a href="#" onclick="openOrderModal()"><i class="fas fa-chevron-right"></i> Tous les services</a></li>
                     </ul>
                 </div>
@@ -2067,7 +2064,7 @@
                 </div>
                 
                 <!-- Progress Bar -->
-                <div class="progress-container mb-4">
+                <div class="progress-container">
                     <div class="progress-steps">
                         <div class="progress-step active" data-step="1">
                             <div class="step-number">1</div>
@@ -2079,25 +2076,21 @@
                         </div>
                         <div class="progress-step" data-step="3">
                             <div class="step-number">3</div>
-                            <div class="step-label">Lien</div>
+                            <div class="step-label">Détails</div>
                         </div>
                         <div class="progress-step" data-step="4">
                             <div class="step-number">4</div>
-                            <div class="step-label">Quantité</div>
-                        </div>
-                        <div class="progress-step" data-step="5">
-                            <div class="step-number">5</div>
                             <div class="step-label">Paiement</div>
                         </div>
                     </div>
                     <div class="progress-bar-container">
-                        <div class="progress-bar-fill" id="progressBar" style="width: 20%"></div>
+                        <div class="progress-bar-fill" id="progressBar" style="width: 25%"></div>
                     </div>
                 </div>
                 
                 <div class="modal-body">
                     <!-- Étape 1: Choix de la plateforme -->
-                    <div class="mb-4" id="platformStep">
+                    <div class="order-step active" id="step1">
                         <h6 class="mb-3">1. Choisissez votre réseau social</h6>
                         <div class="platform-selector">
                             <div class="platform-option tiktok" data-platform="tiktok">
@@ -2131,20 +2124,22 @@
                         </div>
                     </div>
 
-                    <!-- Étape 2: Choix du service (visible après choix plateforme) -->
-                    <div class="service-selector mb-4" id="serviceStep" style="display: none;">
+                    <!-- Étape 2: Choix du service -->
+                    <div class="order-step" id="step2">
                         <h6 class="mb-3">2. Choisissez le service</h6>
-                        <div id="serviceOptions">
+                        <div class="row g-3" id="serviceOptions">
                             <!-- Les services seront injectés dynamiquement -->
                         </div>
                     </div>
 
-                    <!-- Étape 3: Lien (visible après choix service) -->
-                    <div class="link-input mb-4" id="linkStep" style="display: none;">
-                        <h6 class="mb-3">3. Lien vers le compte/vidéo</h6>
-                        <div class="mb-3">
+                    <!-- Étape 3: Détails de la commande -->
+                    <div class="order-step" id="step3">
+                        <h6 class="mb-3">3. Détails de votre commande</h6>
+                        
+                        <!-- Lien du compte -->
+                        <div class="link-input mb-4">
                             <label for="profileLink" class="form-label">
-                                <i class="fas fa-link me-2"></i>Collez le lien complet
+                                <i class="fas fa-link me-2"></i>Lien vers votre profil/publication
                             </label>
                             <input type="url" id="profileLink" class="form-control" 
                                    placeholder="https://www.tiktok.com/@votrecompte" 
@@ -2153,53 +2148,89 @@
                                 Assurez-vous que le compte n'est pas privé
                             </div>
                         </div>
+
+                        <!-- Quantité -->
+                        <div class="quantity-selector mb-4">
+                            <h6 class="mb-3">Quantité souhaitée</h6>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" type="button" onclick="changeQuantity(-getStepValue())">-</button>
+                                <input type="number" id="quantityInput" value="1000" min="1000" max="1000000" step="1000">
+                                <button class="quantity-btn" type="button" onclick="changeQuantity(getStepValue())">+</button>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <small class="text-muted" id="quantityRange">Minimum: 1000 | Maximum: 1,000,000</small>
+                            </div>
+                        </div>
+
+                        <!-- Avertissements spécifiques -->
+                        <div class="warnings-section" id="warningsSection">
+                            <!-- Les avertissements seront injectés dynamiquement -->
+                        </div>
+
+                        <!-- Récapitulatif du prix -->
+                        <div class="price-summary">
+                            <h6 class="mb-3">Récapitulatif du prix</h6>
+                            <div class="price-item">
+                                <span>Service:</span>
+                                <span id="selectedService">-</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Prix unitaire:</span>
+                                <span id="unitPrice">-</span>
+                            </div>
+                            <div class="price-item">
+                                <span>Quantité:</span>
+                                <span id="selectedQuantity">-</span>
+                            </div>
+                            <div class="price-total">
+                                <span>Prix Total:</span>
+                                <span id="totalPrice">-</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Étape 4: Quantité (visible après choix service) -->
-                    <div class="quantity-selector mb-4" id="quantityStep" style="display: none;">
-                        <h6 class="mb-3">4. Quantité souhaitée</h6>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" type="button" onclick="changeQuantity(-1000)">-</button>
-                            <input type="number" id="quantityInput" value="1000" min="1000" max="1000000" step="1000">
-                            <button class="quantity-btn" type="button" onclick="changeQuantity(1000)">+</button>
+                    <!-- Étape 4: Paiement -->
+                    <div class="order-step" id="step4">
+                        <h6 class="mb-3">4. Confirmation de commande</h6>
+                        
+                        <div class="alert alert-success mb-4">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Votre commande est prête ! Veuillez vérifier les détails ci-dessous avant de procéder au paiement.
                         </div>
-                        <div class="mt-2 text-center">
-                            <small class="text-muted">Minimum: 1000 | Maximum: 1,000,000</small>
-                        </div>
-                    </div>
 
-                    <!-- Récapitulatif du prix (visible après choix service) -->
-                    <div class="price-summary mb-4" id="priceSummary" style="display: none;">
-                        <h6 class="mb-3">Récapitulatif du prix</h6>
-                        <div class="price-item">
-                            <span>Service:</span>
-                            <span id="selectedService">-</span>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title mb-3">Récapitulatif final</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Plateforme:</strong> <span id="finalPlatform">-</span></p>
+                                        <p><strong>Service:</strong> <span id="finalService">-</span></p>
+                                        <p><strong>Lien:</strong> <span id="finalLink">-</span></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Quantité:</strong> <span id="finalQuantity">-</span></p>
+                                        <p><strong>Prix unitaire:</strong> <span id="finalUnitPrice">-</span></p>
+                                        <p><strong>Total à payer:</strong> <span id="finalTotal" class="text-primary fw-bold">-</span></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="price-item">
-                            <span>Prix unitaire:</span>
-                            <span id="unitPrice">-</span>
-                        </div>
-                        <div class="price-item">
-                            <span>Quantité:</span>
-                            <span id="selectedQuantity">-</span>
-                        </div>
-                        <div class="price-total">
-                            <span>Prix Total:</span>
-                            <span id="totalPrice">-</span>
-                        </div>
-                    </div>
 
-                    <!-- Conditions -->
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" id="termsCheck">
-                        <label class="form-check-label" for="termsCheck">
-                            J'accepte les <a href="#" class="text-primary">conditions générales</a> et la <a href="#" class="text-primary">politique de confidentialité</a>
-                        </label>
+                        <!-- Conditions -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="termsCheck">
+                            <label class="form-check-label" for="termsCheck">
+                                J'accepte les <a href="#" class="text-primary">conditions générales</a> et la <a href="#" class="text-primary">politique de confidentialité</a>
+                            </label>
+                        </div>
                     </div>
                 </div>
+                
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary" id="confirmOrderBtn" onclick="confirmOrder()" disabled>Confirmer la Commande</button>
+                    <div class="step-buttons">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="display: none;">Précédent</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">Suivant</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2207,60 +2238,99 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Données des services par plateforme
+        // Données des services par plateforme avec les nouveaux prix
         const servicesData = {
             tiktok: [
-                { name: 'Followers', price: 0.40 },
-                { name: 'J\'aime (Likes)', price: 0.35 },
-                { name: 'Vues', price: 0.30 },
-                { name: 'Sauvegardes', price: 0.45 },
-                { name: 'Partages', price: 0.50 },
-                { name: 'Commentaires', price: 0.60 },
-                { name: 'Personnalisés', price: 0.70 },
-                { name: 'J\'aime sur Live', price: 0.80 }
+                { name: 'Followers (High Quality)', price: 1984, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Likes (High Quality)', price: 718, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Views (High Quality)', price: 510, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Commentaires personnalisés (High Quality)', price: 500, unit: '10', min: 10, max: 1000, step: 10 },
+                { name: 'Live Likes (High Quality)', price: 411, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Live Viewers - 30 min', price: 1909, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Live Viewers - 60 min', price: 2930, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Live Viewers - 120 min', price: 4960, unit: '1000', min: 1000, max: 1000000, step: 1000 }
             ],
             instagram: [
-                { name: 'Followers', price: 0.45 },
-                { name: 'J\'aime (Likes)', price: 0.35 },
-                { name: 'Vues', price: 0.25 },
-                { name: 'Commentaires', price: 0.55 },
-                { name: 'Vues Story', price: 0.30 },
-                { name: 'Abonnés', price: 0.40 }
+                { name: 'Abonnés (High Quality)', price: 2070, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Likes (High Quality)', price: 960, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Vues (High Quality)', price: 530, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Commentaires (High Quality)', price: 580, unit: '10', min: 10, max: 1000, step: 10 },
+                { name: 'Vues Story (High Quality)', price: 635, unit: '100', min: 100, max: 10000, step: 100 },
+                { name: 'Likes USA (High Quality)', price: 1440, unit: '1000', min: 1000, max: 1000000, step: 1000 }
             ],
             facebook: [
-                { name: 'Abonnés Page', price: 0.40 },
-                { name: 'Abonnés Profil', price: 0.35 },
-                { name: 'J\'aime Publications', price: 0.30 },
-                { name: 'Réactions Émoji', price: 0.25 },
-                { name: 'Partages', price: 0.45 },
-                { name: 'Membres Groupe', price: 0.50 },
-                { name: 'Vues Vidéo', price: 0.35 },
-                { name: 'Vues Reel', price: 0.40 },
-                { name: 'Commentaires', price: 0.55 },
-                { name: 'Avis Page', price: 0.60 }
+                { name: 'Abonnés Page (HQ)', price: 1750, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Abonnés Profil (HQ)', price: 1750, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Likes publication (HQ)', price: 726, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Réactions Emoji', price: 214, unit: '10', min: 10, max: 1000, step: 10 },
+                { name: 'Partages (HQ)', price: 508, unit: '10', min: 10, max: 1000, step: 10 },
+                { name: 'Membres groupe (HQ)', price: 1064, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Vues vidéo/Reel (HQ)', price: 700, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Commentaires (hommes)', price: 1100, unit: '10', min: 10, max: 1000, step: 10 },
+                { name: 'Commentaires (femmes)', price: 1300, unit: '10', min: 10, max: 1000, step: 10 },
+                { name: 'Avis page', price: 615, unit: '10', min: 10, max: 1000, step: 10 }
             ],
             telegram: [
-                { name: 'Membres Groupe', price: 0.50 },
-                { name: 'Vues Publication', price: 0.30 },
-                { name: 'Vues Future', price: 0.35 },
-                { name: 'Réactions Publication', price: 0.40 }
+                { name: 'Membres (HQ)', price: 1790, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Vues (HQ)', price: 516, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Auto Views', price: 502, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Réactions', price: 534, unit: '1000', min: 1000, max: 1000000, step: 1000 }
             ],
             twitter: [
-                { name: 'Followers', price: 0.35 },
-                { name: 'Likes', price: 0.25 },
-                { name: 'Retweets', price: 0.30 },
-                { name: 'Republication', price: 0.40 },
-                { name: 'Commentaires', price: 0.45 }
+                { name: 'Abonnés (High Quality)', price: 9460, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Likes (High Quality)', price: 1564, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Retweets (High Quality)', price: 5230, unit: '1000', min: 1000, max: 1000000, step: 1000 }
             ],
             youtube: [
-                { name: 'Abonnés', price: 0.50 },
-                { name: 'Vues', price: 0.40 },
-                { name: 'Commentaires', price: 0.60 },
-                { name: 'J\'aime (Likes)', price: 0.35 }
+                { name: 'Abonnés (High Quality)', price: 15664, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Vues (High Quality)', price: 1959, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Likes (High Quality)', price: 1739, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Commentaires (High Quality)', price: 6640, unit: '1000', min: 1000, max: 1000000, step: 1000 }
             ],
             whatsapp: [
-                { name: 'Abonnés Chaîne', price: 0.45 },
-                { name: 'Réactions Chaîne', price: 0.35 }
+                { name: 'Membres - Global', price: 2410, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Membres - USA', price: 3538, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Membres - India', price: 3538, unit: '1000', min: 1000, max: 1000000, step: 1000 },
+                { name: 'Réactions Emoji', price: 2678, unit: '1000', min: 1000, max: 1000000, step: 1000 }
+            ]
+        };
+
+        // Avertissements par plateforme
+        const warningsData = {
+            tiktok: [
+                "SI VOUS AVEZ DÉJÀ ACHETÉ DES FOLLOWERS TIKTOK ET QUE VOUS SOUHAITEZ EN ACHETER À NOUVEAU, ASSUREZ-VOUS QUE VOTRE COMMANDE PRÉCÉDENTE EST DÉJÀ TERMINÉE !!",
+                "Assurez-vous que le compte Tiktok n'est pas privé, et ne changez pas le nom d'utilisateur du compte pendant que des followers sont ajoutés !",
+                "Presque pas de baisse des followers ! Les followers sont stables et de haute qualité."
+            ],
+            instagram: [
+                "Assurez-vous que votre compte Instagram n'est pas privé avant de commander.",
+                "Ne changez pas le nom d'utilisateur pendant le processus de livraison.",
+                "Les services peuvent prendre 24-48 heures pour être complètement livrés."
+            ],
+            facebook: [
+                "Votre page Facebook doit être publique pour recevoir des abonnés.",
+                "Les likes et réactions commencent généralement dans les 30 minutes après la commande.",
+                "Assurez-vous d'avoir les permissions nécessaires sur la page/groupe."
+            ],
+            youtube: [
+                "Les abonnés YouTube sont livrés progressivement sur plusieurs jours pour éviter les suspicions.",
+                "Votre chaîne doit être publique et les vidéos non privées.",
+                "La rétention est garantie à 95% pour tous nos services YouTube."
+            ],
+            twitter: [
+                "Assurez-vous que votre compte Twitter n'est pas protégé (privé).",
+                "Les followers sont livrés de manière organique sur 3-5 jours.",
+                "Évitez de changer le nom d'utilisateur pendant la livraison."
+            ],
+            telegram: [
+                "Vous devez être administrateur du groupe Telegram pour ajouter des membres.",
+                "Les membres sont ajoutés progressivement pour éviter le spam.",
+                "Assurez-vous que le groupe est public ou que vous avez le lien d'invitation."
+            ],
+            whatsapp: [
+                "Vous devez être administrateur du groupe WhatsApp pour ajouter des membres.",
+                "Les membres sont ajoutés manuellement, cela peut prendre plus de temps.",
+                "Le service n'est disponible que pour les groupes publics avec lien d'invitation."
             ]
         };
 
@@ -2270,6 +2340,7 @@
         let unitPrice = 0;
         let quantity = 1000;
         let currentStep = 1;
+        let stepValue = 1000;
         let orderData = {
             platform: null,
             service: null,
@@ -2278,26 +2349,6 @@
             total: 0,
             link: ''
         };
-
-        // Progress bar functionality
-        function updateProgress(step) {
-            const progressSteps = document.querySelectorAll('.progress-step');
-            const progressBar = document.getElementById('progressBar');
-            const progressPercentage = (step / 5) * 100;
-            
-            progressBar.style.width = progressPercentage + '%';
-            
-            progressSteps.forEach((progressStep, index) => {
-                progressStep.classList.remove('active', 'completed');
-                if (index < step - 1) {
-                    progressStep.classList.add('completed');
-                } else if (index === step - 1) {
-                    progressStep.classList.add('active');
-                }
-            });
-            
-            currentStep = step;
-        }
 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
@@ -2385,32 +2436,34 @@
                     this.classList.add('selected');
                     selectedPlatform = this.dataset.platform;
                     showServicesForPlatform(selectedPlatform);
-                    updateProgress(2);
                 });
             });
             
             // Validation du lien en temps réel
             const profileLinkInput = document.getElementById('profileLink');
             profileLinkInput.addEventListener('input', function() {
-                validateOrder();
+                validateStep3();
             });
             
             // Validation des conditions
             const termsCheck = document.getElementById('termsCheck');
             termsCheck.addEventListener('change', function() {
-                validateOrder();
+                validateStep4();
             });
             
             // Quantité input
             const quantityInput = document.getElementById('quantityInput');
             quantityInput.addEventListener('change', function() {
                 let value = parseInt(this.value);
-                if (value < 1000) value = 1000;
-                if (value > 1000000) value = 1000000;
-                this.value = value;
-                quantity = value;
-                updatePrice();
-                validateOrder();
+                const service = getSelectedServiceData();
+                if (service) {
+                    if (value < service.min) value = service.min;
+                    if (value > service.max) value = service.max;
+                    this.value = value;
+                    quantity = value;
+                    updatePrice();
+                    validateStep3();
+                }
             });
             
             // Smooth scrolling
@@ -2429,7 +2482,145 @@
                 });
             });
         });
-        
+
+        // Navigation dans les étapes
+        function nextStep() {
+            if (currentStep < 4) {
+                // Validation de l'étape actuelle
+                if (!validateCurrentStep()) {
+                    return;
+                }
+                
+                // Cacher l'étape actuelle
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                // Mettre à jour la progression
+                currentStep++;
+                updateProgress(currentStep);
+                
+                // Afficher la prochaine étape
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                
+                // Mettre à jour les boutons
+                updateButtons();
+                
+                // Si on arrive à l'étape 4, préparer le récapitulatif
+                if (currentStep === 4) {
+                    prepareFinalSummary();
+                }
+            } else if (currentStep === 4) {
+                // Confirmer la commande
+                confirmOrder();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                // Cacher l'étape actuelle
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                
+                // Revenir à l'étape précédente
+                currentStep--;
+                updateProgress(currentStep);
+                
+                // Afficher l'étape précédente
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                
+                // Mettre à jour les boutons
+                updateButtons();
+            }
+        }
+
+        function updateProgress(step) {
+            const progressSteps = document.querySelectorAll('.progress-step');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercentage = (step / 4) * 100;
+            
+            progressBar.style.width = progressPercentage + '%';
+            
+            progressSteps.forEach((progressStep, index) => {
+                progressStep.classList.remove('active', 'completed');
+                if (index < step - 1) {
+                    progressStep.classList.add('completed');
+                } else if (index === step - 1) {
+                    progressStep.classList.add('active');
+                }
+            });
+        }
+
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (currentStep === 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.textContent = 'Suivant';
+            } else if (currentStep === 4) {
+                prevBtn.style.display = 'inline-block';
+                nextBtn.textContent = 'Confirmer & Payer';
+                nextBtn.classList.remove('btn-primary');
+                nextBtn.classList.add('btn-success');
+            } else {
+                prevBtn.style.display = 'inline-block';
+                nextBtn.textContent = 'Suivant';
+                nextBtn.classList.remove('btn-success');
+                nextBtn.classList.add('btn-primary');
+            }
+        }
+
+        function validateCurrentStep() {
+            switch(currentStep) {
+                case 1:
+                    return validateStep1();
+                case 2:
+                    return validateStep2();
+                case 3:
+                    return validateStep3();
+                case 4:
+                    return validateStep4();
+                default:
+                    return false;
+            }
+        }
+
+        function validateStep1() {
+            if (!selectedPlatform) {
+                alert('Veuillez sélectionner une plateforme.');
+                return false;
+            }
+            return true;
+        }
+
+        function validateStep2() {
+            if (!selectedService) {
+                alert('Veuillez sélectionner un service.');
+                return false;
+            }
+            return true;
+        }
+
+        function validateStep3() {
+            const profileLink = document.getElementById('profileLink').value;
+            
+            if (!profileLink || !profileLink.includes('http')) {
+                alert('Veuillez entrer un lien valide vers votre profil.');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateStep4() {
+            const termsCheck = document.getElementById('termsCheck').checked;
+            
+            if (!termsCheck) {
+                alert('Veuillez accepter les conditions générales.');
+                return false;
+            }
+            
+            return true;
+        }
+
         // Affiche les services pour une plateforme
         function showServicesForPlatform(platform) {
             const serviceOptions = document.getElementById('serviceOptions');
@@ -2438,74 +2629,124 @@
             serviceOptions.innerHTML = '';
             
             services.forEach(service => {
-                const option = document.createElement('div');
-                option.className = 'service-option';
-                option.dataset.service = service.name;
-                option.dataset.price = service.price;
+                const col = document.createElement('div');
+                col.className = 'col-md-6';
                 
-                option.innerHTML = `
-                    <div class="service-name">${service.name}</div>
-                    <div class="service-price">${service.price.toFixed(2)} XOF / 1000</div>
+                const card = document.createElement('div');
+                card.className = 'service-mini-card';
+                card.dataset.service = service.name;
+                card.dataset.price = service.price;
+                card.dataset.unit = service.unit;
+                card.dataset.min = service.min;
+                card.dataset.max = service.max;
+                card.dataset.step = service.step;
+                
+                card.innerHTML = `
+                    <div class="service-mini-icon">
+                        <i class="fab fa-${platform}"></i>
+                    </div>
+                    <h6 class="mb-2">${service.name}</h6>
+                    <div class="service-price">${service.price.toLocaleString()} CFA / ${service.unit}</div>
                 `;
                 
-                option.addEventListener('click', function() {
-                    document.querySelectorAll('.service-option').forEach(opt => {
-                        opt.classList.remove('selected');
+                card.addEventListener('click', function() {
+                    document.querySelectorAll('.service-mini-card').forEach(card => {
+                        card.classList.remove('selected');
                     });
                     this.classList.add('selected');
-                    selectedService = this.dataset.service;
-                    unitPrice = parseFloat(this.dataset.price);
-                    showNextSteps();
+                    selectService(this);
                 });
                 
-                serviceOptions.appendChild(option);
+                col.appendChild(card);
+                serviceOptions.appendChild(col);
             });
-            
-            // Afficher l'étape des services
-            document.getElementById('serviceStep').style.display = 'block';
         }
-        
-        // Affiche les étapes suivantes
-        function showNextSteps() {
-            document.getElementById('linkStep').style.display = 'block';
-            document.getElementById('quantityStep').style.display = 'block';
-            document.getElementById('priceSummary').style.display = 'block';
+
+        function selectService(element) {
+            selectedService = element.dataset.service;
+            unitPrice = parseFloat(element.dataset.price);
+            stepValue = parseInt(element.dataset.step);
             
-            // Mettre à jour l'affichage
-            document.getElementById('selectedService').textContent = `${selectedService} (${selectedPlatform})`;
+            // Mettre à jour la quantité
+            quantity = parseInt(element.dataset.min);
+            document.getElementById('quantityInput').value = quantity;
+            document.getElementById('quantityInput').min = element.dataset.min;
+            document.getElementById('quantityInput').max = element.dataset.max;
+            document.getElementById('quantityInput').step = element.dataset.step;
+            
+            // Mettre à jour l'affichage de la plage
+            document.getElementById('quantityRange').textContent = 
+                `Minimum: ${parseInt(element.dataset.min).toLocaleString()} | Maximum: ${parseInt(element.dataset.max).toLocaleString()}`;
+            
+            // Afficher les avertissements
+            showWarnings(selectedPlatform);
+            
+            // Mettre à jour le prix
             updatePrice();
-            updateProgress(3);
-            validateOrder();
         }
-        
-        // Change la quantité
-        function changeQuantity(amount) {
-            const quantityInput = document.getElementById('quantityInput');
-            let newQuantity = parseInt(quantityInput.value) + amount;
+
+        function getSelectedServiceData() {
+            if (!selectedPlatform || !selectedService) return null;
             
-            if (newQuantity < 1000) newQuantity = 1000;
-            if (newQuantity > 1000000) newQuantity = 1000000;
+            const services = servicesData[selectedPlatform];
+            return services.find(service => service.name === selectedService);
+        }
+
+        function showWarnings(platform) {
+            const warningsSection = document.getElementById('warningsSection');
+            const warnings = warningsData[platform] || [];
             
-            quantityInput.value = newQuantity;
-            quantity = newQuantity;
-            updatePrice();
-            validateOrder();
+            warningsSection.innerHTML = '';
             
-            // Mettre à jour la progression si toutes les autres étapes sont validées
-            if (selectedPlatform && selectedService && document.getElementById('profileLink').value) {
-                updateProgress(4);
+            if (warnings.length > 0) {
+                warningsSection.innerHTML = '<h6 class="mb-3"><i class="fas fa-exclamation-triangle me-2"></i>Important à savoir :</h6>';
+                
+                warnings.forEach((warning, index) => {
+                    const warningCard = document.createElement('div');
+                    warningCard.className = 'warning-card';
+                    warningCard.innerHTML = `
+                        <div class="warning-title">
+                            <i class="fas fa-info-circle"></i>
+                            <h6>Attention ${index + 1}</h6>
+                        </div>
+                        <p>${warning}</p>
+                    `;
+                    warningsSection.appendChild(warningCard);
+                });
             }
         }
-        
-        // Met à jour le prix
+
+        function changeQuantity(amount) {
+            const quantityInput = document.getElementById('quantityInput');
+            const service = getSelectedServiceData();
+            
+            if (service) {
+                let newQuantity = parseInt(quantityInput.value) + amount;
+                
+                if (newQuantity < service.min) newQuantity = service.min;
+                if (newQuantity > service.max) newQuantity = service.max;
+                
+                quantityInput.value = newQuantity;
+                quantity = newQuantity;
+                updatePrice();
+            }
+        }
+
+        function getStepValue() {
+            const service = getSelectedServiceData();
+            return service ? service.step : 1000;
+        }
+
         function updatePrice() {
             if (!selectedService || !unitPrice) return;
             
-            const total = (quantity / 1000) * unitPrice;
+            const service = getSelectedServiceData();
+            const total = (quantity / parseInt(service.unit)) * unitPrice;
             
-            document.getElementById('unitPrice').textContent = `${unitPrice.toFixed(2)} XOF / 1000`;
-            document.getElementById('selectedQuantity').textContent = quantity.toLocaleString();
-            document.getElementById('totalPrice').textContent = `${total.toFixed(2)} XOF`;
+            document.getElementById('selectedService').textContent = `${selectedService} (${selectedPlatform})`;
+            document.getElementById('unitPrice').textContent = `${unitPrice.toLocaleString()} CFA / ${service.unit}`;
+            document.getElementById('selectedQuantity').textContent = `${quantity.toLocaleString()} ${service.unit === '1000' ? 'unités' : 'unités'}`;
+            document.getElementById('totalPrice').textContent = `${total.toLocaleString()} CFA`;
             
             // Mettre à jour les données de commande
             orderData.platform = selectedPlatform;
@@ -2514,24 +2755,21 @@
             orderData.quantity = quantity;
             orderData.total = total;
         }
-        
-        // Valide la commande
-        function validateOrder() {
+
+        function prepareFinalSummary() {
+            const service = getSelectedServiceData();
             const profileLink = document.getElementById('profileLink').value;
-            const termsCheck = document.getElementById('termsCheck').checked;
-            const confirmBtn = document.getElementById('confirmOrderBtn');
             
-            const isValid = selectedPlatform && 
-                           selectedService && 
-                           profileLink && 
-                           profileLink.includes('http') && 
-                           termsCheck;
+            document.getElementById('finalPlatform').textContent = selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1);
+            document.getElementById('finalService').textContent = selectedService;
+            document.getElementById('finalLink').textContent = profileLink;
+            document.getElementById('finalQuantity').textContent = `${quantity.toLocaleString()} ${service.unit === '1000' ? 'unités' : 'unités'}`;
+            document.getElementById('finalUnitPrice').textContent = `${unitPrice.toLocaleString()} CFA / ${service.unit}`;
+            document.getElementById('finalTotal').textContent = `${orderData.total.toLocaleString()} CFA`;
             
-            confirmBtn.disabled = !isValid;
-            return isValid;
+            orderData.link = profileLink;
         }
-        
-        // Ouvre la modal de commande
+
         function openOrderModal(platform = null) {
             // Réinitialiser la modal
             resetModal();
@@ -2541,6 +2779,8 @@
                 const platformElement = document.querySelector(`.platform-option[data-platform="${platform}"]`);
                 if (platformElement) {
                     platformElement.click();
+                    // Aller directement à l'étape 2
+                    nextStep();
                 }
             }
             
@@ -2548,90 +2788,68 @@
             const modal = new bootstrap.Modal(document.getElementById('orderModal'));
             modal.show();
         }
-        
-        // Réinitialise la modal
+
         function resetModal() {
             selectedPlatform = null;
             selectedService = null;
             unitPrice = 0;
             quantity = 1000;
+            currentStep = 1;
+            stepValue = 1000;
             
             // Réinitialiser les sélections
             document.querySelectorAll('.platform-option').forEach(opt => {
                 opt.classList.remove('selected');
             });
             
-            document.querySelectorAll('.service-option').forEach(opt => {
-                opt.classList.remove('selected');
+            document.querySelectorAll('.service-mini-card').forEach(card => {
+                card.classList.remove('selected');
             });
             
             // Réinitialiser les champs
             document.getElementById('profileLink').value = '';
             document.getElementById('quantityInput').value = '1000';
+            document.getElementById('quantityInput').min = '1000';
+            document.getElementById('quantityInput').max = '1000000';
+            document.getElementById('quantityInput').step = '1000';
             document.getElementById('termsCheck').checked = false;
             
-            // Cacher les étapes sauf la première
-            document.getElementById('serviceStep').style.display = 'none';
-            document.getElementById('linkStep').style.display = 'none';
-            document.getElementById('quantityStep').style.display = 'none';
-            document.getElementById('priceSummary').style.display = 'none';
+            // Réinitialiser les étapes
+            document.querySelectorAll('.order-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('step1').classList.add('active');
             
-            // Désactiver le bouton de confirmation
-            document.getElementById('confirmOrderBtn').disabled = true;
+            // Réinitialiser les avertissements
+            document.getElementById('warningsSection').innerHTML = '';
             
             // Réinitialiser la progression
             updateProgress(1);
+            updateButtons();
         }
-        
-        // Confirme la commande
+
         function confirmOrder() {
-            if (!validateOrder()) {
-                alert('Veuillez remplir tous les champs requis.');
+            if (!validateStep4()) {
                 return;
             }
             
-            // Récupérer le lien
-            orderData.link = document.getElementById('profileLink').value;
-            
-            // Mettre à jour la progression à 100%
-            updateProgress(5);
-            
             // Ici, vous enverriez normalement les données à votre backend
-            alert(`Commande confirmée!\n\n` +
-                  `Plateforme: ${orderData.platform}\n` +
-                  `Service: ${orderData.service}\n` +
+            alert(`🎉 Commande confirmée !\n\n` +
+                  `Plateforme: ${selectedPlatform}\n` +
+                  `Service: ${selectedService}\n` +
                   `Quantité: ${orderData.quantity.toLocaleString()}\n` +
-                  `Prix total: ${orderData.total.toFixed(2)} XOF\n\n` +
-                  `Lien: ${orderData.link}\n\n` +
-                  `Vous serez redirigé vers la page de paiement.`);
+                  `Prix total: ${orderData.total.toLocaleString()} CFA\n\n` +
+                  `Vous serez redirigé vers la page de paiement dans 3 secondes...`);
             
             // Fermer la modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
             modal.hide();
             
-            // Redirection vers la page de paiement (à implémenter)
-            // window.location.href = `checkout.php?platform=${orderData.platform}&service=${encodeURIComponent(orderData.service)}&quantity=${orderData.quantity}&total=${orderData.total}&link=${encodeURIComponent(orderData.link)}`;
-        }
-        
-        // Valide la commande
-        function validateOrder() {
-            const profileLink = document.getElementById('profileLink').value;
-            const termsCheck = document.getElementById('termsCheck').checked;
-            const confirmBtn = document.getElementById('confirmOrderBtn');
-            
-            const isValid = selectedPlatform && 
-                           selectedService && 
-                           profileLink && 
-                           profileLink.includes('http') && 
-                           termsCheck;
-            
-            confirmBtn.disabled = !isValid;
-            return isValid;
-            const modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
-            modal.hide();
-            
-            // Redirection vers la page de paiement (à implémenter)
-            // window.location.href = `checkout.php?platform=${orderData.platform}&service=${encodeURIComponent(orderData.service)}&quantity=${orderData.quantity}&total=${orderData.total}&link=${encodeURIComponent(orderData.link)}`;
+            // Simuler une redirection vers la page de paiement
+            setTimeout(() => {
+                // window.location.href = `checkout.php?platform=${orderData.platform}&service=${encodeURIComponent(orderData.service)}&quantity=${orderData.quantity}&total=${orderData.total}&link=${encodeURIComponent(orderData.link)}`;
+                console.log('Redirection vers le paiement');
+            }, 3000);
         }
 
         // Fonctions pour le modal vidéo
